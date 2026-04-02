@@ -3,12 +3,17 @@ interface Props {
   label: string;
   href: string;
   variant?: 'primary' | 'ghost' | 'light';
+  external?: boolean;
 }
 
-const { label, href, variant = 'primary' } = Astro.props;
+const { label, href, variant = 'primary', external = false } = Astro.props;
 ---
 
-<a href={href} class={`btn btn--${variant}`}>{label}</a>
+<a
+  href={href}
+  class={`btn btn--${variant}`}
+  {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+>{label}</a>
 
 <style>
   .btn {

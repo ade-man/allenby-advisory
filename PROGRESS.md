@@ -78,6 +78,43 @@ Track progress on each task. Mark items `[x]` as they are completed.
 
 ---
 
+## Task 6b — Incosmetics Global Case Study ✅
+
+- [x] Add third CaseCard to `client-successes.astro` project index
+- [x] Update case index grid to `grid-template-columns: repeat(2, 1fr)` (2×2 — accommodates all 4 cards)
+- [x] Create `src/pages/client-successes/incosmetics-global.astro` (created `client-successes/` subdirectory under `pages/`)
+- [x] Build Breadcrumb (← Client successes)
+- [x] Build page header (eyebrow, H1, body)
+- [x] Build top section (2-column: text + meta card with MetricBox — 4 meta items incl. Technology: NFC badge scanning)
+- [x] Build body columns (3-column separator grid: challenge / what we did / results)
+- [x] Build narrative section ("The full story" — --offwhite bg, H3 + 6 body paragraphs, max-width 720px)
+- [x] Build outcomes section (--white bg, H3 + 3 dark metric cells in separator grid using --charcoal background)
+- [x] Build role strip
+- [x] Build Footer CTA (dark section)
+- [x] Add reveal animations to all sections
+- [x] Verify: `npm run build` completed — 7 pages built, no errors; `/client-successes/incosmetics-global` in output ✓
+
+---
+
+## Task 6c — RX Global Customer Research Case Study ✅
+
+- [x] Add fourth CaseCard to `client-successes.astro` project index
+- [x] Update case index grid to 2×2 layout (`grid-template-columns: repeat(2, 1fr)`)
+- [x] Create `src/pages/client-successes/rx-global-research.astro`
+- [x] Build Breadcrumb (← Client successes)
+- [x] Build page header (eyebrow, H1, body)
+- [x] Build top section (2-column: text + meta card with MetricBox — 4 meta items including Agency: The Sound HQ)
+- [x] Build body columns (3-column separator grid: challenge / what we did / results)
+- [x] Build narrative section (--offwhite bg, H3 + 7 body paragraphs, max-width 720px)
+- [x] Build quote section (Chet Burchett quote — --offwhite bg, accent left-border blockquote styling)
+- [x] Build outcomes section (--white bg, H3 + 3 dark metric cells: 88% / MRS / 19 on --charcoal bg)
+- [x] Build role strip
+- [x] Build Footer CTA (dark section)
+- [x] Add reveal animations to all sections
+- [x] Verify: `npm run build` completed — 7 pages built, no errors; `/client-successes/rx-global-research` in output ✓
+
+---
+
 ## Task 7 — About Page ✅
 
 - [x] Build Hero split (2-column: text left, credential card right with "AA" avatar)
@@ -126,10 +163,37 @@ Track progress on each task. Mark items `[x]` as they are completed.
 
 ---
 
+## Task 11 — Open Graph Meta Tags and Favicon ✅
+
+- [x] All favicon files copied to `public/` root (favicon.ico, favicon-16x16.png, favicon-32x32.png, apple-touch-icon.png, favicon-192x192.png, favicon-512x512.png, site.webmanifest, og-default.png)
+- [x] Update `Base.astro` props interface — added `ogTitle`, `ogDescription`, `ogImage`, `ogType` (all optional with defaults)
+- [x] Add favicon link tags to `Base.astro` `<head>`
+- [x] Add canonical URL link to `Base.astro` `<head>`
+- [x] Add Open Graph meta tags to `Base.astro` `<head>`
+- [x] Add Twitter Card meta tags to `Base.astro` `<head>`
+- [x] Update `<title>` tag to use `{title}` directly (removed `| Allenby Advisory` suffix — full titles now passed from each page)
+- [x] Update all 7 pages with correct full titles and descriptions per TASKS_ADDENDUM_META.md
+- [x] Verify: `npm run build` completed — 7 pages built in 853ms, no errors
+
+---
+
+## Task 12 — Google Calendar Booking Integration ✅
+
+- [x] Update `Button.astro` — added optional `external` prop; renders `target="_blank" rel="noopener noreferrer"` when `external={true}`
+- [x] Update `Nav.astro` — desktop CTA and mobile drawer "Book a consultation" link now points to `https://calendar.app.google/kscewyXr9JDFXDYK8`, opens in new tab
+- [x] Update `index.astro` — homepage hero CTA (`#contact`) kept as-is; footer CTA button updated to booking URL with `external={true}`; footer CTA body copy replaced with two new paragraphs per spec
+- [x] Update `services.astro` — all three service block buttons + footer CTA button updated to booking URL
+- [x] Update `client-successes.astro` — both "Get in touch" buttons + footer CTA button updated to booking URL
+- [x] Update `client-successes/incosmetics-global.astro` — top section button + footer CTA button updated to booking URL
+- [x] Update `client-successes/rx-global-research.astro` — top section button + footer CTA button updated to booking URL
+- [x] Update `about.astro` — "Book a free call" + footer CTA button updated to booking URL
+- [x] Update `insights.astro` — footer CTA button updated to booking URL
+- [x] Verify: `npm run build` completed — 7 pages built in 924ms, no errors
+
+---
+
 ## Future Tasks (Not in Scope)
 
-- [ ] Task 11: Open Graph meta tags and favicon
-- [ ] Task 12: Calendly embed / booking widget
 - [ ] Task 13: Individual article pages under /insights/[slug]
 - [ ] Task 14: Contact form
 - [ ] Task 15: Deploy to Netlify or Vercel
