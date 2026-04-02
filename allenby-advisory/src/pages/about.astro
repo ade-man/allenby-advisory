@@ -1,0 +1,406 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+---
+
+<Base
+  title="About"
+  description="Why Ade Allenby started Allenby Advisory, and how the team works."
+>
+  <Nav />
+
+  <main>
+
+    <!-- ============================================================
+         HERO — 2-column split
+         ============================================================ -->
+    <section class="hero-split">
+      <div class="hero-left">
+        <SectionLabel text="About Allenby Advisory" />
+        <h1 class="hero-h1">Why I Started Allenby Advisory</h1>
+        <p>I spent over 10 years working inside the event technology and digital space — with organisers, vendors and delivery teams across the UK and Europe's major trade shows and exhibitions.</p>
+        <p>What I kept seeing was the same pattern: event teams with real ambition for their digital experience, but without the specialist knowledge to navigate the technology landscape confidently.</p>
+        <p>Allenby Advisory exists to give event organising teams access to that expertise precisely when they need it — without the cost and commitment of a full-time hire.</p>
+      </div>
+      <div class="hero-right">
+        <div class="credential-card reveal">
+          <div class="avatar">
+            <span class="avatar-text font-brand">AA</span>
+          </div>
+          <p class="cred-name font-brand">Ade Allenby</p>
+          <p class="cred-title">Founder, Allenby Advisory</p>
+          <ul class="bio-list">
+            <li>10+ years in event technology and digital strategy</li>
+            <li>Projects across RX, Imbibe, Equiphotel and others</li>
+            <li>Speaker at EN Marketing Conference 2024</li>
+            <li>Contributor to Event Industry News, Collingwood Group</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         THE TEAM
+         ============================================================ -->
+    <section class="team-section">
+      <div class="section-inner">
+        <SectionLabel text="The team" />
+        <h2 class="section-h2">You're Not Just Getting One Consultant</h2>
+        <p class="team-body">Over my years in the industry I've built a close network of specialists who share the same commitment to practical, results-focused work in the events space. I'm the single point of contact — the team assembled around your project reflects exactly what your challenge needs.</p>
+        <div class="grid-separator team-grid">
+          <div class="team-cell reveal">
+            <p class="team-label">Digital strategy and product</p>
+            <p class="team-desc">Roadmapping, feature scoping, platform strategy</p>
+          </div>
+          <div class="team-cell reveal">
+            <p class="team-label">Marketing and communications</p>
+            <p class="team-desc">Adoption campaigns, audience engagement, onboarding</p>
+          </div>
+          <div class="team-cell reveal">
+            <p class="team-label">Tech implementation</p>
+            <p class="team-desc">Integration, vendor management, delivery oversight</p>
+          </div>
+          <div class="team-cell reveal">
+            <p class="team-label">Data and insights</p>
+            <p class="team-desc">Measurement frameworks, performance reporting</p>
+          </div>
+          <div class="team-cell reveal">
+            <p class="team-label">Onsite operations</p>
+            <p class="team-desc">Event-day delivery, concierge, logistics</p>
+          </div>
+          <div class="team-cell reveal">
+            <p class="team-label">Sales and commercial</p>
+            <p class="team-desc">Exhibitor and sponsor value proposition</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FLEXIBLE — 2-column split
+         ============================================================ -->
+    <section class="flexible-split">
+      <div class="flexible-left">
+        <SectionLabel text="Ways of working" />
+        <h2 class="section-h2">Flexible by Design</h2>
+        <p>We're built to work in the way that suits you — not to fit you into a fixed engagement model.</p>
+        <p style="margin-top: 14px;">Most engagements start with a free 30-minute conversation. No pitch, no pressure — just an honest discussion about your challenge.</p>
+        <div style="margin-top: 28px;">
+          <Button label="Book a free call" href="/#contact" />
+        </div>
+      </div>
+      <div class="flexible-right">
+        <ul class="engagement-list">
+          <li class="engagement-item reveal">
+            <span class="engagement-num">01</span>
+            <div class="engagement-content">
+              <p class="engagement-label">Strategic advisory</p>
+              <p class="engagement-desc">A few hours a month. Independent perspective, on demand. No retainer, no commitment.</p>
+            </div>
+          </li>
+          <li class="engagement-item reveal">
+            <span class="engagement-num">02</span>
+            <div class="engagement-content">
+              <p class="engagement-label">Project delivery</p>
+              <p class="engagement-desc">Scoped to your timeline and budget. Full accountability from brief to results.</p>
+            </div>
+          </li>
+          <li class="engagement-item reveal">
+            <span class="engagement-num">03</span>
+            <div class="engagement-content">
+              <p class="engagement-label">Embedded support</p>
+              <p class="engagement-desc">Regular involvement through your event cycle — part of the team without the overhead.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER CTA
+         ============================================================ -->
+    <div class="dark-section">
+      <div class="cta-inner">
+        <h2>Start with a Conversation</h2>
+        <p>The free 30-minute consultation is focused entirely on your challenge — honest, no-obligation, and genuinely useful.</p>
+        <div style="margin-top: 32px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px;">
+          <Button label="Book a free consultation" href="/#contact" variant="light" />
+          <p class="contact-email">Or email directly: <a href="mailto:ade@allenby-advisory.com" class="email-link">ade@allenby-advisory.com</a></p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  /* ---- Hero split ---- */
+  .hero-split {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    border-bottom: 0.5px solid var(--lightgrey);
+  }
+
+  .hero-left {
+    padding: var(--space-2xl) var(--space-lg);
+    background: var(--offwhite);
+    border-right: 0.5px solid var(--lightgrey);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .hero-h1 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 1.06;
+    letter-spacing: 0.01em;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+  }
+
+  .hero-left p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--body);
+    max-width: 540px;
+  }
+
+  .hero-right {
+    background: var(--white);
+    padding: var(--space-2xl) var(--space-lg);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  /* Credential card */
+  .credential-card {
+    border: 0.5px solid var(--lightgrey);
+    padding: 28px;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .avatar {
+    width: 56px;
+    height: 56px;
+    background: var(--charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .avatar-text {
+    font-size: 16px;
+    color: var(--white);
+  }
+
+  .cred-name {
+    font-size: 17px;
+    color: var(--charcoal);
+    margin-bottom: 4px;
+  }
+
+  .cred-title {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+    margin-bottom: 16px;
+  }
+
+  .bio-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .bio-list li {
+    font-size: 13px;
+    color: var(--body);
+    padding: 9px 0;
+    border-bottom: 0.5px solid var(--lightgrey);
+    padding-left: 12px;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .bio-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+  }
+
+  /* ---- Team section ---- */
+  .team-section {
+    background: var(--white);
+  }
+
+  .section-h2 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    color: var(--charcoal);
+    max-width: 640px;
+    margin-bottom: 16px;
+  }
+
+  .team-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--body);
+    max-width: 600px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .team-cell {
+    background: var(--offwhite) !important;
+    padding: 22px;
+  }
+
+  .team-label {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .team-desc {
+    font-size: 13px;
+    color: var(--body);
+    line-height: 1.5;
+  }
+
+  /* ---- Flexible split ---- */
+  .flexible-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 0.5px solid var(--lightgrey);
+    border-bottom: 0.5px solid var(--lightgrey);
+  }
+
+  .flexible-left {
+    background: var(--offwhite);
+    padding: var(--space-2xl) var(--space-lg);
+    border-right: 0.5px solid var(--lightgrey);
+  }
+
+  .flexible-left p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--body);
+    max-width: 420px;
+  }
+
+  .flexible-right {
+    background: var(--white);
+    padding: var(--space-2xl) var(--space-lg);
+  }
+
+  .engagement-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .engagement-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 0.5px solid var(--lightgrey);
+  }
+
+  .engagement-num {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--lightgrey);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 36px;
+  }
+
+  .engagement-label {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .engagement-desc {
+    font-size: 13px;
+    color: var(--body);
+    line-height: 1.5;
+  }
+
+  /* ---- Footer CTA ---- */
+  .dark-section { padding: var(--space-2xl) 0; }
+
+  .cta-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+  }
+
+  .contact-email {
+    font-size: 11px !important;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #666 !important;
+    max-width: none !important;
+  }
+
+  .email-link {
+    color: #6b9fc5;
+    text-decoration: none;
+  }
+
+  .email-link:hover { text-decoration: underline; }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 768px) {
+    .hero-split {
+      grid-template-columns: 1fr;
+    }
+    .hero-left { border-right: none; }
+    .hero-h1 { font-size: 34px; }
+    .hero-right { justify-content: flex-start; }
+
+    .flexible-split {
+      grid-template-columns: 1fr;
+    }
+    .flexible-left { border-right: none; border-bottom: 0.5px solid var(--lightgrey); }
+
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

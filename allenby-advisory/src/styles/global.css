@@ -1,0 +1,241 @@
+/* ============================================================
+   ALLENBY ADVISORY — GLOBAL CSS
+   Single source of truth for all visual decisions
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. CSS CUSTOM PROPERTIES — Colours & Spacing
+   ------------------------------------------------------------ */
+:root {
+  /* Colours */
+  --charcoal:   #1A1A1A;   /* Primary dark — backgrounds, headings, buttons */
+  --offwhite:   #F5F4F2;   /* Page background */
+  --white:      #FFFFFF;   /* Content surface (cards, content columns) */
+  --body:       #2e2d2b;   /* All body text — NOT mid-grey */
+  --midgrey:    #888780;   /* Captions, labels, metadata, eyebrows only */
+  --lightgrey:  #D3D1C7;   /* Borders and dividers — 0.5px */
+  --accent:     #2C5F8A;   /* Links, result badges, blockquote borders — max once per section */
+
+  /* Spacing */
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  24px;
+  --space-lg:  40px;
+  --space-xl:  56px;
+  --space-2xl: 72px;
+
+  /* Breakpoints (for reference) */
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+}
+
+/* ------------------------------------------------------------
+   2. BASE RESET
+   ------------------------------------------------------------ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ------------------------------------------------------------
+   3. BASE BODY STYLES
+   ------------------------------------------------------------ */
+body {
+  font-family: 'Archivo', sans-serif;
+  background-color: var(--offwhite);
+  color: var(--body);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ------------------------------------------------------------
+   4. TYPOGRAPHY UTILITY CLASSES
+   ------------------------------------------------------------ */
+.font-brand {
+  font-family: 'Julius Sans One', sans-serif;
+  font-weight: 400;
+}
+
+.font-display {
+  font-family: 'Archivo Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.font-label {
+  font-family: 'Archivo', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--midgrey);
+}
+
+.font-body {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--body);
+}
+
+/* ------------------------------------------------------------
+   5. SECTION LABEL (EYEBROW)
+   ------------------------------------------------------------ */
+.section-label {
+  font-family: 'Archivo', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--midgrey);
+  margin-bottom: 28px;
+}
+
+/* ------------------------------------------------------------
+   6. GRID SEPARATOR TECHNIQUE
+   Used for service tiles, capability grid, insight items, etc.
+   Set gap: 0.5px; background: --lightgrey; children: bg --white
+   ------------------------------------------------------------ */
+.grid-separator {
+  display: grid;
+  gap: 0.5px;
+  background: var(--lightgrey);
+  border: 0.5px solid var(--lightgrey);
+}
+
+.grid-separator > * {
+  background: var(--white);
+}
+
+/* ------------------------------------------------------------
+   7. DARK SECTION PATTERN
+   Used for network strip and all footer CTAs
+   ------------------------------------------------------------ */
+.dark-section {
+  background: var(--charcoal);
+  color: var(--white);
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+.dark-section h2 {
+  font-family: 'Archivo Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 34px;
+  color: var(--white);
+  letter-spacing: 0.01em;
+  line-height: 1.06;
+  margin-bottom: 16px;
+}
+
+.dark-section p {
+  color: #c8c6c2;
+  font-size: 15px;
+  line-height: 1.65;
+  max-width: 560px;
+}
+
+.dark-section .section-label {
+  color: #555;
+}
+
+/* ------------------------------------------------------------
+   8. SCROLL REVEAL ANIMATION
+   ------------------------------------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------
+   9. SLIDE-UP ANIMATION (for hero elements)
+   ------------------------------------------------------------ */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease forwards;
+  animation-fill-mode: both;
+}
+
+/* Stagger children */
+.animate-slide-up:nth-child(1) { animation-delay: 0s; }
+.animate-slide-up:nth-child(2) { animation-delay: 0.1s; }
+.animate-slide-up:nth-child(3) { animation-delay: 0.2s; }
+
+/* Stagger transition-delay for grid-separator children with reveal */
+.grid-separator > *:nth-child(1) { transition-delay: 0s; }
+.grid-separator > *:nth-child(2) { transition-delay: 0.1s; }
+.grid-separator > *:nth-child(3) { transition-delay: 0.2s; }
+.grid-separator > *:nth-child(4) { transition-delay: 0.3s; }
+.grid-separator > *:nth-child(5) { transition-delay: 0.15s; }
+.grid-separator > *:nth-child(6) { transition-delay: 0.25s; }
+.grid-separator > *:nth-child(7) { transition-delay: 0.1s; }
+.grid-separator > *:nth-child(8) { transition-delay: 0.2s; }
+
+/* ------------------------------------------------------------
+   10. SKILL PILLS (network section)
+   ------------------------------------------------------------ */
+.skill-pill {
+  border: 0.5px solid #444;
+  padding: 6px 14px;
+  font-family: 'Archivo', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #aaa;
+  display: inline-block;
+}
+
+/* ------------------------------------------------------------
+   11. SECTION UTILITIES
+   ------------------------------------------------------------ */
+section {
+  border-bottom: 0.5px solid var(--lightgrey);
+}
+
+.section-inner {
+  padding: var(--space-2xl) var(--space-lg);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ------------------------------------------------------------
+   12. MOBILE OVERRIDES
+   ------------------------------------------------------------ */
+@media (max-width: 768px) {
+  .section-inner {
+    padding: 48px 20px;
+  }
+
+  .dark-section {
+    padding: 48px 20px;
+  }
+}

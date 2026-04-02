@@ -1,0 +1,383 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+---
+
+<Base
+  title="Services"
+  description="Allenby Advisory offers three ways to work with event organising teams: strategic advisory, project delivery, and capability building."
+>
+  <Nav />
+
+  <main>
+
+    <!-- ============================================================
+         PAGE HEADER
+         ============================================================ -->
+    <section class="page-header">
+      <div class="section-inner">
+        <SectionLabel text="What we do" />
+        <h1 class="page-h1">Services</h1>
+        <p class="page-intro">Allenby Advisory works with event organising teams in three ways. Choose the level of support that fits where you are right now.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SERVICE BLOCK 1 — ADVISORY
+         ============================================================ -->
+    <div class="service-block reveal" id="advisory">
+      <div class="service-left">
+        <p class="service-num">01</p>
+        <p class="service-type">Advisory</p>
+        <span class="service-badge">On demand</span>
+      </div>
+      <div class="service-right">
+        <h3>Strategic Input, When You Need It</h3>
+        <p class="service-body">You have internal resource but need specialist knowledge to make the right decisions. We provide senior expertise on demand — reviewing your technology landscape, interrogating supplier proposals, and pressure-testing your digital roadmap.</p>
+        <p class="fit-label">This is right for you if:</p>
+        <ul class="fit-list">
+          <li>You're evaluating new technology and want an independent view</li>
+          <li>You need a sounding board for a digital strategy decision</li>
+          <li>You want someone who's been in the room with these vendors before</li>
+        </ul>
+        <div class="how-it-works">
+          <span class="how-label">How it works:</span> Flexible engagement from a few hours a month. No long-term commitment required.
+        </div>
+        <Button label="Let's talk" href="/#contact" />
+      </div>
+    </div>
+
+    <!-- ============================================================
+         SERVICE BLOCK 2 — DELIVERY
+         ============================================================ -->
+    <div class="service-block reveal" id="delivery">
+      <div class="service-left">
+        <p class="service-num">02</p>
+        <p class="service-type">Project delivery</p>
+        <span class="service-badge">End to end</span>
+      </div>
+      <div class="service-right">
+        <h3>From Brief to Results</h3>
+        <p class="service-body">You have a clear outcome to achieve — a new platform to implement, a feature to build, a programme to launch — but not the specialist capacity to deliver it well. We scope the project, manage the vendor relationship, and see it through to a successful outcome at your event.</p>
+        <p class="fit-label">This is right for you if:</p>
+        <ul class="fit-list">
+          <li>You're replacing an existing technology platform</li>
+          <li>You're launching a new audience-facing feature — meetings, navigation, awards, sessions</li>
+          <li>You need a project lead with deep event tech experience to drive delivery</li>
+        </ul>
+        <div class="how-it-works">
+          <span class="how-label">How it works:</span> Project-based engagement scoped to your timeline and budget.
+        </div>
+        <Button label="Tell us about your project" href="/#contact" />
+      </div>
+    </div>
+
+    <!-- ============================================================
+         SERVICE BLOCK 3 — ENGAGEMENT
+         ============================================================ -->
+    <div class="service-block reveal" id="engagement">
+      <div class="service-left">
+        <p class="service-num">03</p>
+        <p class="service-type">Capability building</p>
+        <span class="service-badge">4–12 weeks</span>
+      </div>
+      <div class="service-right">
+        <h3>Getting More from What You Already Have</h3>
+        <p class="service-body">Sometimes the platform isn't the problem — the problem is adoption, engagement and results. We work with your team to build the strategy and onboarding journey that turns existing tech investment into real outcomes for your audience.</p>
+        <p class="fit-label">This is right for you if:</p>
+        <ul class="fit-list">
+          <li>You've invested in a platform that isn't delivering expected engagement</li>
+          <li>Your team needs to build confidence around a tool</li>
+          <li>You want to move from "we have the tech" to "our audience uses the tech"</li>
+        </ul>
+        <div class="how-it-works">
+          <span class="how-label">How it works:</span> Structured programme, typically 4–12 weeks around your event cycle.
+        </div>
+        <Button label="Let's explore this" href="/#contact" />
+      </div>
+    </div>
+
+    <!-- ============================================================
+         CAPABILITIES GRID
+         ============================================================ -->
+    <section class="capabilities-section">
+      <div class="section-inner">
+        <SectionLabel text="What we cover" />
+        <h2 class="section-h2">Areas We Work Across</h2>
+        <div class="grid-separator capabilities-grid">
+          <div class="capability-cell reveal">
+            <p class="cap-label">Event app strategy</p>
+            <p class="cap-desc">Sourcing, scoping and implementation</p>
+          </div>
+          <div class="capability-cell reveal">
+            <p class="cap-label">Meetings programmes</p>
+            <p class="cap-desc">1-2-1 matchmaking and scheduling</p>
+          </div>
+          <div class="capability-cell reveal">
+            <p class="cap-label">Navigation and wayfinding</p>
+            <p class="cap-desc">Digital and physical onsite experience</p>
+          </div>
+          <div class="capability-cell reveal">
+            <p class="cap-label">Speaker and content tech</p>
+            <p class="cap-desc">Programme platform selection</p>
+          </div>
+          <div class="capability-cell reveal">
+            <p class="cap-label">Data and audience insight</p>
+            <p class="cap-desc">Measurement frameworks and reporting</p>
+          </div>
+          <div class="capability-cell reveal">
+            <p class="cap-label">Adoption campaigns</p>
+            <p class="cap-desc">Communication and onboarding strategy</p>
+          </div>
+          <div class="capability-cell reveal">
+            <p class="cap-label">Digital roadmapping</p>
+            <p class="cap-desc">Customer journey to tech requirements</p>
+          </div>
+          <div class="capability-cell reveal">
+            <p class="cap-label">Vendor management</p>
+            <p class="cap-desc">Sourcing, evaluation and contracting</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER CTA
+         ============================================================ -->
+    <div class="dark-section" id="contact">
+      <div class="cta-inner">
+        <h2>Not Sure Which Applies to You?</h2>
+        <p>Most conversations start with a problem, not a service category. Book a free 30-minute call and we'll work it out together.</p>
+        <div style="margin-top: 32px;">
+          <Button label="Book a free consultation" href="/#contact" variant="light" />
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  /* ---- Page header ---- */
+  .page-header {
+    background: var(--offwhite);
+  }
+
+  .page-h1 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 1.06;
+    letter-spacing: 0.01em;
+    color: var(--charcoal);
+    margin-bottom: var(--space-md);
+  }
+
+  .page-intro {
+    max-width: 560px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--body);
+  }
+
+  /* ---- Service block ---- */
+  .service-block {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    border-bottom: 0.5px solid var(--lightgrey);
+  }
+
+  .service-left {
+    background: var(--offwhite);
+    border-right: 0.5px solid var(--lightgrey);
+    padding: 40px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .service-num {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--lightgrey);
+    line-height: 1;
+  }
+
+  .service-type {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--charcoal);
+    line-height: 1.1;
+  }
+
+  .service-badge {
+    display: inline-block;
+    background: var(--charcoal);
+    color: var(--white);
+    font-family: 'Archivo', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    margin-top: 8px;
+    align-self: flex-start;
+  }
+
+  .service-right {
+    background: var(--white);
+    padding: 40px 40px;
+  }
+
+  .service-right h3 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--charcoal);
+    letter-spacing: 0.01em;
+    margin-bottom: 14px;
+  }
+
+  .service-body {
+    color: var(--body);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    max-width: 600px;
+  }
+
+  .fit-label {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+    margin-bottom: 10px;
+  }
+
+  .fit-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .fit-list li {
+    font-size: 14px;
+    color: var(--body);
+    padding: 9px 0;
+    border-bottom: 0.5px solid var(--lightgrey);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .fit-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 0;
+  }
+
+  .how-it-works {
+    background: var(--offwhite);
+    border: 0.5px solid var(--lightgrey);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--body);
+    margin-bottom: 24px;
+    max-width: 500px;
+  }
+
+  .how-label {
+    font-weight: 700;
+  }
+
+  /* ---- Capabilities ---- */
+  .capabilities-section {
+    background: var(--offwhite);
+  }
+
+  .section-h2 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    color: var(--charcoal);
+    max-width: 640px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .capabilities-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .capability-cell {
+    padding: 20px;
+  }
+
+  .cap-label {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .cap-desc {
+    font-size: 13px;
+    color: var(--body);
+    line-height: 1.5;
+  }
+
+  /* ---- Footer CTA ---- */
+  .cta-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+  }
+
+  .dark-section {
+    padding: var(--space-2xl) 0;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 768px) {
+    .page-h1 {
+      font-size: 34px;
+    }
+
+    .service-block {
+      grid-template-columns: 1fr;
+    }
+
+    .service-left {
+      border-right: none;
+      border-bottom: 0.5px solid var(--lightgrey);
+      padding: 24px 20px;
+    }
+
+    .service-right {
+      padding: 24px 20px;
+    }
+
+    .capabilities-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

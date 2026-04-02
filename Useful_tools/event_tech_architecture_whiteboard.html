@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Tech Architecture — Whiteboard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f0f12;--bg2:#1a1a20;--bg3:#24242c;--tx1:#e8e8ec;--tx2:#9898a4;--tx3:#68687a;
+  --bd:#2a2a36;--bd2:#38384a;
+  --api:#34d399;--manual:#f97316;--auto:#a78bfa;
+  --pur:#7c6cf0;--pur-bg:#1e1a3a;--pur-bd:#3d3470;
+  --tea:#34d399;--tea-bg:#0c2e24;--tea-bd:#1a5c46;
+  --cor:#f97316;--cor-bg:#2e1a0c;--cor-bd:#5c3a1a;
+  --pin:#f472b6;--pin-bg:#2e0c20;--pin-bd:#5c1a40;
+  --blu:#60a5fa;--blu-bg:#0c1a2e;--blu-bd:#1a3a5c;
+  --gra:#9898a4;--gra-bg:#1a1a20;--gra-bd:#38384a;
+  --amb:#fbbf24;--amb-bg:#2e2a0c;--amb-bd:#5c541a;
+  --grn:#34d399;--grn-bg:#0c2e1a;--grn-bd:#1a5c3a;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--tx1);font-family:'DM Sans',system-ui,sans-serif}
+
+#toolbar{position:fixed;top:0;left:0;right:0;height:48px;background:var(--bg2);border-bottom:1px solid var(--bd);display:flex;align-items:center;padding:0 16px;gap:12px;z-index:100}
+#toolbar h1{font-size:14px;font-weight:500;letter-spacing:-0.02em;white-space:nowrap}
+.tb-sep{width:1px;height:24px;background:var(--bd)}
+.tb-btn{font-size:12px;padding:6px 14px;border-radius:6px;border:1px solid var(--bd);background:transparent;color:var(--tx2);cursor:pointer;transition:all .15s;font-family:inherit;white-space:nowrap}
+.tb-btn:hover{background:var(--bg3);color:var(--tx1)}
+.tb-btn.on{background:#7c6cf020;color:var(--pur);border-color:var(--pur-bd)}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+#zoom-display{font-size:11px;color:var(--tx3);min-width:40px;text-align:center;font-variant-numeric:tabular-nums}
+.tb-icon{width:32px;height:32px;border-radius:6px;border:1px solid var(--bd);background:transparent;color:var(--tx2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;font-size:16px}
+.tb-icon:hover{background:var(--bg3);color:var(--tx1)}
+
+#canvas-container{position:fixed;top:48px;left:0;right:0;bottom:0;overflow:hidden;cursor:grab}
+#canvas-container.grabbing{cursor:grabbing}
+#canvas{position:absolute;transform-origin:0 0;will-change:transform}
+
+#lines-svg{position:absolute;top:0;left:0;pointer-events:none;overflow:visible}
+
+.sys-box{position:absolute;border-radius:10px;border:1px solid;padding:14px 16px;min-width:180px;max-width:240px;cursor:pointer;transition:border-color .2s,box-shadow .2s,opacity .2s;user-select:none}
+.sys-box:hover{box-shadow:0 0 0 1px rgba(255,255,255,0.08),0 8px 32px rgba(0,0,0,0.4)}
+.sys-box.dimmed{opacity:0.12}
+.sys-box.highlight{box-shadow:0 0 0 2px var(--pur),0 0 24px rgba(124,108,240,0.2)}
+.sys-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.sys-title{font-size:13px;font-weight:600;line-height:1.3;letter-spacing:-0.01em}
+.sys-sub{font-size:11px;opacity:0.55;margin-top:2px;font-style:italic;line-height:1.3}
+.collapse-btn{width:20px;height:20px;border-radius:4px;border:none;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;margin-top:1px}
+.collapse-btn:hover{background:rgba(255,255,255,0.15);color:#fff}
+.sys-data{margin-top:10px;display:flex;flex-wrap:wrap;gap:4px;overflow:hidden;transition:max-height .3s ease,opacity .25s ease}
+.sys-data.collapsed{max-height:0!important;opacity:0;margin-top:0}
+.data-pill{font-size:10px;padding:4px 9px;border-radius:5px;border:1px dashed rgba(255,255,255,0.18);background:rgba(255,255,255,0.04);line-height:1.2;white-space:nowrap}
+.data-pill.shared{border-style:solid;border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.1);font-weight:500}
+.int-badge{position:absolute;top:-6px;right:-6px;width:14px;height:14px;border-radius:50%;border:2px solid var(--bg);font-size:0}
+.int-api{background:var(--api)}.int-manual{background:var(--manual)}.int-auto{background:var(--auto)}
+
+.c-pur{background:var(--pur-bg);border-color:var(--pur-bd);color:#d4ccff}
+.c-tea{background:var(--tea-bg);border-color:var(--tea-bd);color:#a7f3d0}
+.c-cor{background:var(--cor-bg);border-color:var(--cor-bd);color:#fed7aa}
+.c-pin{background:var(--pin-bg);border-color:var(--pin-bd);color:#fbcfe8}
+.c-blu{background:var(--blu-bg);border-color:var(--blu-bd);color:#bfdbfe}
+.c-gra{background:var(--gra-bg);border-color:var(--gra-bd);color:#d4d4dc}
+.c-amb{background:var(--amb-bg);border-color:var(--amb-bd);color:#fde68a}
+.c-grn{background:var(--grn-bg);border-color:var(--grn-bd);color:#a7f3d0}
+
+#legend{position:fixed;bottom:16px;left:16px;background:var(--bg2);border:1px solid var(--bd);border-radius:8px;padding:10px 14px;display:flex;gap:16px;font-size:11px;color:var(--tx2);z-index:100;align-items:center}
+.leg-i{display:flex;align-items:center;gap:5px}
+.leg-dot{width:10px;height:10px;border-radius:50%}
+.leg-line{width:22px;height:0;border-top:2px solid}
+
+#minimap{position:fixed;bottom:16px;right:16px;width:180px;height:120px;background:var(--bg2);border:1px solid var(--bd);border-radius:8px;z-index:100;overflow:hidden;cursor:pointer}
+#minimap canvas{width:100%;height:100%}
+#minimap .viewport-rect{position:absolute;border:1.5px solid var(--pur);border-radius:2px;pointer-events:none;opacity:0.7}
+
+#info-panel{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:14px 20px;z-index:100;display:none;max-width:500px;font-size:12px;line-height:1.6;box-shadow:0 8px 32px rgba(0,0,0,0.4)}
+#info-panel.open{display:block}
+#info-panel h4{font-size:13px;font-weight:600;margin-bottom:8px}
+.conn-row{display:flex;align-items:center;gap:8px;padding:3px 0}
+.conn-tag{font-size:10px;padding:2px 8px;border-radius:6px;font-weight:500;flex-shrink:0}
+.ct-api{background:rgba(52,211,153,0.15);color:#34d399}
+.ct-manual{background:rgba(249,115,22,0.15);color:#f97316}
+.ct-auto{background:rgba(167,139,250,0.15);color:#a78bfa}
+
+.dot-grid{position:absolute;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(circle,var(--bd) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;opacity:0.4}
+
+#help-hint{position:fixed;top:60px;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--bd);border-radius:8px;padding:8px 16px;font-size:11px;color:var(--tx2);z-index:100;transition:opacity .5s;pointer-events:none}
+</style>
+</head>
+<body>
+
+<div id="toolbar">
+  <h1>Event tech architecture</h1>
+  <div class="tb-sep"></div>
+  <button class="tb-btn on" onclick="setView('exhibitor',this)">Exhibitor lifecycle</button>
+  <button class="tb-btn" onclick="setView('attendee',this)">Attendee journey</button>
+  <button class="tb-btn" onclick="setView('content',this)">Content pipeline</button>
+  <button class="tb-btn" onclick="setView('commercial',this)">Commercial flow</button>
+  <button class="tb-btn" onclick="setView('full',this)">Full map</button>
+  <div class="tb-sep"></div>
+  <button class="tb-btn" id="collapse-all-btn" onclick="toggleAll()">Collapse all</button>
+  <div class="tb-right">
+    <button class="tb-icon" onclick="zoomTo(zoom*1.25)" title="Zoom in">+</button>
+    <span id="zoom-display">100%</span>
+    <button class="tb-icon" onclick="zoomTo(zoom*0.8)" title="Zoom out">−</button>
+    <button class="tb-icon" onclick="fitToView()" title="Fit to view">⊡</button>
+  </div>
+</div>
+
+<div id="canvas-container">
+  <div id="canvas">
+    <div class="dot-grid" id="dot-grid"></div>
+    <svg id="lines-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+</div>
+
+<div id="legend">
+  <span style="font-weight:500;color:var(--tx1)">Connections:</span>
+  <div class="leg-i"><div class="leg-line" style="border-color:var(--api)"></div>API</div>
+  <div class="leg-i"><div class="leg-line" style="border-color:var(--manual);border-style:dashed"></div>Manual</div>
+  <div class="leg-i"><div class="leg-line" style="border-color:var(--auto);border-style:dotted;border-width:2.5px"></div>Auto</div>
+  <div class="tb-sep" style="height:16px"></div>
+  <div class="leg-i"><span class="data-pill" style="font-size:10px;padding:2px 6px">process</span></div>
+  <div class="leg-i"><span class="data-pill shared" style="font-size:10px;padding:2px 6px">shared entity</span></div>
+</div>
+
+<div id="minimap"><canvas id="minimap-canvas"></canvas><div class="viewport-rect" id="viewport-rect"></div></div>
+
+<div id="info-panel"><h4 id="info-title"></h4><div id="info-conns"></div></div>
+
+<div id="help-hint">Scroll to zoom · Drag to pan · Click systems to explore connections · Toggle ▾ to collapse</div>
+
+<script>
+const VIEWS={
+exhibitor:{
+  desc:"Exhibitor lifecycle",
+  systems:{
+    crm:{x:60,y:60,cls:"c-pur",title:"CRM / Sales",sub:"sales pipeline & relationships",int:"api",
+      data:[{n:"Sales pipeline",s:0},{n:"Exhibiting companies",s:1},{n:"Representatives",s:1},{n:"Contracts",s:0},{n:"Revenue history",s:0},{n:"Renewal dates",s:0}]},
+    invoicing:{x:340,y:60,cls:"c-pur",title:"Invoicing / ERP",sub:"financial processing",int:"api",
+      data:[{n:"Customer invoices",s:0},{n:"Exhibiting companies",s:1},{n:"Payments",s:0},{n:"Credit balances",s:0}]},
+    exh_manual:{x:60,y:300,cls:"c-pin",title:"Exhibitor manual",sub:"onboarding & logistics",int:"manual",
+      data:[{n:"Stand specs",s:0},{n:"Exhibiting companies",s:1},{n:"Logistics forms",s:0},{n:"Brand assets",s:0},{n:"Team profiles",s:0},{n:"Deadlines",s:0}]},
+    floorplan:{x:340,y:280,cls:"c-pin",title:"Technical floorplan",sub:"stand allocation & layout",int:"api",
+      data:[{n:"Booth management",s:0},{n:"Exhibiting companies",s:1},{n:"Event layout",s:0},{n:"Utilities map",s:0}]},
+    wayfinding:{x:620,y:60,cls:"c-pin",title:"Attendee wayfinding",sub:"interactive floor map",int:"api",
+      data:[{n:"Interactive map",s:0},{n:"Exhibiting companies",s:1},{n:"Routes & POIs",s:0},{n:"Live crowd data",s:0}]},
+    lead_capture:{x:620,y:280,cls:"c-cor",title:"Lead capture",sub:"badge scanning at booths",int:"api",
+      data:[{n:"Badge scans",s:0},{n:"Exhibiting companies",s:1},{n:"Representatives",s:1},{n:"Qualification notes",s:0},{n:"Meeting outcomes",s:0}]},
+    lead_enrich:{x:340,y:520,cls:"c-blu",title:"Lead enrichment",sub:"behavioural context layer",int:"auto",
+      data:[{n:"Session attendance",s:0},{n:"Content consumed",s:0},{n:"Engagement score",s:0},{n:"External data",s:0}]},
+    crm_handoff:{x:620,y:520,cls:"c-cor",title:"CRM handoff",sub:"export to exhibitor CRM",int:"api",
+      data:[{n:"Exhibiting companies",s:1},{n:"Representatives",s:1},{n:"Visitors",s:1},{n:"Lead packages",s:0}]},
+    roi_report:{x:60,y:540,cls:"c-blu",title:"ROI report",sub:"exhibitor performance",int:"auto",
+      data:[{n:"Lead summary",s:0},{n:"Footfall data",s:0},{n:"Cost per lead",s:0},{n:"YoY comparison",s:0}]},
+    renewal:{x:340,y:740,cls:"c-pur",title:"Renewal pipeline",sub:"next-cycle planning",int:"auto",
+      data:[{n:"Renewal scores",s:0},{n:"Upgrade opportunities",s:0},{n:"Competitor signals",s:0}]},
+  },
+  connections:[
+    {from:"crm",to:"invoicing",type:"api",label:"Deal → invoice"},
+    {from:"crm",to:"exh_manual",type:"auto",label:"Contract → onboarding"},
+    {from:"exh_manual",to:"floorplan",type:"api",label:"Stand allocation"},
+    {from:"floorplan",to:"wayfinding",type:"api",label:"Simplified layout"},
+    {from:"wayfinding",to:"lead_capture",type:"api",label:"Booth locations"},
+    {from:"lead_capture",to:"lead_enrich",type:"auto",label:"Scans + behaviour"},
+    {from:"lead_enrich",to:"crm_handoff",type:"api",label:"Enriched leads"},
+    {from:"lead_capture",to:"crm_handoff",type:"api",label:"Raw lead data"},
+    {from:"crm_handoff",to:"roi_report",type:"auto",label:"Lead metrics"},
+    {from:"roi_report",to:"renewal",type:"auto",label:"ROI score"},
+    {from:"renewal",to:"crm",type:"auto",label:"Renewal signals"},
+    {from:"invoicing",to:"floorplan",type:"manual",label:"Package → stand size"},
+  ]
+},
+attendee:{
+  desc:"Attendee journey",
+  systems:{
+    website:{x:60,y:60,cls:"c-tea",title:"Website / CMS",sub:"event website & landing pages",int:"api",
+      data:[{n:"Event pages",s:0},{n:"Exhibitor directory",s:0},{n:"Agenda & speakers",s:1},{n:"SEO content",s:0},{n:"Registration CTAs",s:0}]},
+    email:{x:340,y:60,cls:"c-tea",title:"Email marketing",sub:"campaigns & nurture",int:"auto",
+      data:[{n:"Campaigns",s:0},{n:"Segments",s:0},{n:"Visitors",s:1},{n:"Performance data",s:0}]},
+    paid_media:{x:620,y:60,cls:"c-tea",title:"Paid media / ads",sub:"audience acquisition",int:"api",
+      data:[{n:"Ad audiences",s:0},{n:"Visitors",s:1},{n:"Attribution data",s:0}]},
+    registration:{x:60,y:300,cls:"c-cor",title:"Digital registration",sub:"online sign-up & profiles",int:"api",
+      data:[{n:"Visitors",s:1},{n:"Ticket / badge type",s:0},{n:"Interests & goals",s:0},{n:"GDPR consent",s:0},{n:"Profile photo",s:0}]},
+    badging:{x:340,y:300,cls:"c-cor",title:"Onsite badging",sub:"badge print & check-in",int:"api",
+      data:[{n:"Visitors",s:1},{n:"Badge design",s:0},{n:"Print queue",s:0},{n:"Check-in timestamp",s:0}]},
+    access:{x:620,y:300,cls:"c-cor",title:"Access control",sub:"scanning & capacity",int:"api",
+      data:[{n:"Entry scans",s:0},{n:"Zone access rules",s:0},{n:"Capacity tracking",s:0},{n:"Session attendance",s:0}]},
+    platform:{x:60,y:540,cls:"c-blu",title:"Event platform",sub:"networking & matchmaking",int:"api",
+      data:[{n:"Matchmaking",s:0},{n:"Exhibitor profiles",s:1},{n:"Visitors",s:1},{n:"Agenda & speakers",s:1},{n:"Mobile app",s:0}]},
+    feedback:{x:340,y:540,cls:"c-amb",title:"NPS / surveys",sub:"feedback collection",int:"auto",
+      data:[{n:"Attendee NPS",s:0},{n:"Session ratings",s:0},{n:"Written comments",s:0}]},
+    followup:{x:620,y:540,cls:"c-tea",title:"Follow-up sequences",sub:"post-event nurture",int:"auto",
+      data:[{n:"Thank-you emails",s:0},{n:"Content recaps",s:0},{n:"Survey invitations",s:0}]},
+    analytics:{x:340,y:760,cls:"c-blu",title:"Analytics / BI",sub:"dashboards & reporting",int:"api",
+      data:[{n:"Attendance reports",s:0},{n:"Engagement metrics",s:0},{n:"YoY trends",s:0}]},
+  },
+  connections:[
+    {from:"website",to:"registration",type:"api",label:"Registration widget"},
+    {from:"email",to:"registration",type:"api",label:"UTM → conversion"},
+    {from:"paid_media",to:"registration",type:"api",label:"Ad → registration"},
+    {from:"registration",to:"badging",type:"api",label:"Profile → badge"},
+    {from:"badging",to:"access",type:"api",label:"Badge QR validates"},
+    {from:"access",to:"platform",type:"api",label:"Entry data"},
+    {from:"registration",to:"platform",type:"api",label:"Profile & prefs"},
+    {from:"platform",to:"feedback",type:"auto",label:"Post-event trigger"},
+    {from:"feedback",to:"followup",type:"auto",label:"Survey in sequence"},
+    {from:"followup",to:"analytics",type:"auto",label:"Engagement data"},
+    {from:"feedback",to:"analytics",type:"api",label:"NPS scores"},
+    {from:"access",to:"analytics",type:"api",label:"Attendance data"},
+  ]
+},
+content:{
+  desc:"Content pipeline",
+  systems:{
+    speakers:{x:60,y:60,cls:"c-blu",title:"Speaker mgmt",sub:"call for papers & logistics",int:"manual",
+      data:[{n:"Speaker profiles",s:0},{n:"Agenda & speakers",s:1},{n:"Presentation assets",s:0},{n:"AV requirements",s:0},{n:"Travel / logistics",s:0}]},
+    programme:{x:340,y:60,cls:"c-blu",title:"Programme build",sub:"schedule & tracks",int:"api",
+      data:[{n:"Session metadata",s:0},{n:"Schedule grid",s:0},{n:"Agenda & speakers",s:1},{n:"Room allocation",s:0}]},
+    show_guide:{x:620,y:60,cls:"c-gra",title:"Show guide",sub:"print & digital programme",int:"manual",
+      data:[{n:"Exhibitor directory",s:0},{n:"Programme schedule",s:0},{n:"Floor plan",s:0}]},
+    av:{x:60,y:300,cls:"c-gra",title:"AV / streaming",sub:"stage production & broadcast",int:"api",
+      data:[{n:"Stage production",s:0},{n:"Livestreaming",s:0},{n:"Recording files",s:0},{n:"Hybrid delivery",s:0}]},
+    polling:{x:340,y:300,cls:"c-blu",title:"Live polling / Q&A",sub:"audience interaction",int:"api",
+      data:[{n:"Polls & votes",s:0},{n:"Q&A questions",s:0},{n:"Gamification",s:0}]},
+    capture:{x:620,y:280,cls:"c-blu",title:"Content capture",sub:"recording & summarisation",int:"auto",
+      data:[{n:"Session recordings",s:0},{n:"Photography",s:0},{n:"Social clips",s:0},{n:"AI summaries",s:0}]},
+    transcription:{x:60,y:540,cls:"c-amb",title:"Transcription",sub:"speech-to-text processing",int:"auto",
+      data:[{n:"Full text",s:0},{n:"Timestamps",s:0},{n:"Speaker diarisation",s:0}]},
+    summaries:{x:340,y:520,cls:"c-amb",title:"Session summaries",sub:"AI-generated takeaways",int:"auto",
+      data:[{n:"Key takeaways",s:0},{n:"Action items",s:0},{n:"Theme tags",s:0}]},
+    library:{x:620,y:520,cls:"c-tea",title:"On-demand library",sub:"post-event content hub",int:"auto",
+      data:[{n:"Video archive",s:0},{n:"Slide decks",s:0},{n:"Searchable text",s:0},{n:"Access control",s:0}]},
+    content_mktg:{x:340,y:740,cls:"c-tea",title:"Content marketing",sub:"repurposing for growth",int:"manual",
+      data:[{n:"Blog posts",s:0},{n:"Whitepapers",s:0},{n:"Video highlights",s:0}]},
+  },
+  connections:[
+    {from:"speakers",to:"programme",type:"api",label:"Speaker → sessions"},
+    {from:"programme",to:"show_guide",type:"manual",label:"Schedule export"},
+    {from:"speakers",to:"av",type:"manual",label:"AV requirements"},
+    {from:"programme",to:"av",type:"manual",label:"Production schedule"},
+    {from:"av",to:"capture",type:"api",label:"Recordings flow"},
+    {from:"av",to:"transcription",type:"auto",label:"Audio feed"},
+    {from:"polling",to:"capture",type:"api",label:"Interaction logs"},
+    {from:"transcription",to:"summaries",type:"auto",label:"Text → AI summary"},
+    {from:"capture",to:"library",type:"auto",label:"Processed content"},
+    {from:"summaries",to:"library",type:"auto",label:"Summaries published"},
+    {from:"library",to:"content_mktg",type:"manual",label:"Content repurposed"},
+    {from:"capture",to:"summaries",type:"auto",label:"Recordings → summaries"},
+  ]
+},
+commercial:{
+  desc:"Commercial flow",
+  systems:{
+    crm:{x:60,y:60,cls:"c-pur",title:"CRM / Sales",sub:"pipeline & relationships",int:"api",
+      data:[{n:"Sales pipeline",s:0},{n:"Exhibiting companies",s:1},{n:"Representatives",s:1},{n:"Revenue history",s:0},{n:"Renewal dates",s:0}]},
+    proposals:{x:340,y:60,cls:"c-pur",title:"Proposals / pitch",sub:"media kits & rate cards",int:"manual",
+      data:[{n:"Media kits",s:0},{n:"Rate cards",s:0},{n:"Sales collateral",s:0}]},
+    sponsorship:{x:620,y:60,cls:"c-pur",title:"Sponsorship mgmt",sub:"packages & entitlements",int:"manual",
+      data:[{n:"Package inventory",s:0},{n:"Entitlements",s:0},{n:"Exhibiting companies",s:1},{n:"Brand assets",s:0}]},
+    invoicing:{x:60,y:300,cls:"c-gra",title:"Invoicing / ERP",sub:"financial processing",int:"api",
+      data:[{n:"Customer invoices",s:0},{n:"Payments",s:0},{n:"Credit balances",s:0},{n:"Revenue recognition",s:0}]},
+    email:{x:340,y:300,cls:"c-tea",title:"Email marketing",sub:"exhibitor & sponsor comms",int:"auto",
+      data:[{n:"Campaigns",s:0},{n:"Segments",s:0},{n:"Exhibiting companies",s:1}]},
+    fulfilment:{x:620,y:300,cls:"c-pur",title:"Sponsor fulfilment",sub:"deliverable tracking",int:"auto",
+      data:[{n:"Deliverable checklist",s:0},{n:"Impression reports",s:0},{n:"Proof screenshots",s:0}]},
+    analytics:{x:60,y:540,cls:"c-blu",title:"Analytics / BI",sub:"revenue dashboards",int:"api",
+      data:[{n:"Revenue dashboards",s:0},{n:"Attribution",s:0},{n:"Custom reports",s:0}]},
+    sponsor_roi:{x:340,y:540,cls:"c-blu",title:"Sponsor ROI",sub:"value measurement",int:"auto",
+      data:[{n:"Impression tracking",s:0},{n:"Engagement metrics",s:0},{n:"Value calculation",s:0}]},
+    renewal:{x:620,y:540,cls:"c-pur",title:"Renewal pipeline",sub:"next-cycle planning",int:"auto",
+      data:[{n:"Renewal scores",s:0},{n:"Upgrade opportunities",s:0},{n:"Competitor signals",s:0}]},
+  },
+  connections:[
+    {from:"crm",to:"proposals",type:"manual",label:"Stats for pitch"},
+    {from:"proposals",to:"sponsorship",type:"api",label:"Proposal → deal"},
+    {from:"crm",to:"invoicing",type:"api",label:"Deal → invoice"},
+    {from:"crm",to:"email",type:"api",label:"Segments for nurture"},
+    {from:"sponsorship",to:"fulfilment",type:"api",label:"Entitlements to track"},
+    {from:"sponsorship",to:"email",type:"manual",label:"Logos in templates"},
+    {from:"invoicing",to:"analytics",type:"api",label:"Revenue data"},
+    {from:"fulfilment",to:"sponsor_roi",type:"auto",label:"Impression data"},
+    {from:"sponsor_roi",to:"renewal",type:"auto",label:"ROI → renewal score"},
+    {from:"renewal",to:"crm",type:"auto",label:"Renewal signals"},
+    {from:"analytics",to:"sponsor_roi",type:"api",label:"Engagement metrics"},
+  ]
+},
+full:{
+  desc:"Full system map",
+  systems:{
+    crm:{x:60,y:60,cls:"c-pur",title:"CRM / Sales",sub:"",int:"api",data:[{n:"Pipeline",s:0},{n:"Companies",s:1},{n:"Contacts",s:1}]},
+    invoicing:{x:310,y:60,cls:"c-pur",title:"Invoicing / ERP",sub:"",int:"api",data:[{n:"Invoices",s:0},{n:"Payments",s:0}]},
+    sponsorship:{x:540,y:60,cls:"c-pur",title:"Sponsorship",sub:"",int:"manual",data:[{n:"Packages",s:0},{n:"Entitlements",s:0}]},
+    proposals:{x:770,y:60,cls:"c-pur",title:"Proposals",sub:"",int:"manual",data:[{n:"Media kits",s:0},{n:"Rate cards",s:0}]},
+    website:{x:60,y:240,cls:"c-tea",title:"Website / CMS",sub:"",int:"api",data:[{n:"Event pages",s:0},{n:"Directory",s:0},{n:"Blog",s:0}]},
+    email:{x:310,y:240,cls:"c-tea",title:"Email marketing",sub:"",int:"auto",data:[{n:"Campaigns",s:0},{n:"Segments",s:0}]},
+    social:{x:540,y:240,cls:"c-tea",title:"Social media",sub:"",int:"auto",data:[{n:"Content calendar",s:0},{n:"UGC",s:0}]},
+    paid:{x:770,y:240,cls:"c-tea",title:"Paid media",sub:"",int:"api",data:[{n:"Audiences",s:0},{n:"Attribution",s:0}]},
+    registration:{x:60,y:420,cls:"c-cor",title:"Registration",sub:"",int:"api",data:[{n:"Visitors",s:1},{n:"Tickets",s:0},{n:"GDPR",s:0}]},
+    badging:{x:310,y:420,cls:"c-cor",title:"Onsite badging",sub:"",int:"api",data:[{n:"Badge print",s:0},{n:"Check-in",s:0}]},
+    access:{x:540,y:420,cls:"c-cor",title:"Access control",sub:"",int:"api",data:[{n:"Entry scans",s:0},{n:"Zone access",s:0},{n:"Capacity",s:0}]},
+    session_scan:{x:770,y:420,cls:"c-cor",title:"Session scan",sub:"",int:"api",data:[{n:"Attendance",s:0},{n:"Duration",s:0}]},
+    exh_manual:{x:60,y:600,cls:"c-pin",title:"Exhibitor manual",sub:"",int:"manual",data:[{n:"Stand specs",s:0},{n:"Companies",s:1},{n:"Assets",s:0}]},
+    floorplan:{x:310,y:600,cls:"c-pin",title:"Floorplan",sub:"",int:"api",data:[{n:"Layout",s:0},{n:"Stands",s:0}]},
+    wayfinding:{x:540,y:600,cls:"c-pin",title:"Wayfinding",sub:"",int:"api",data:[{n:"Map",s:0},{n:"Routes",s:0}]},
+    lead_cap:{x:770,y:600,cls:"c-pin",title:"Lead capture",sub:"",int:"api",data:[{n:"Scans",s:0},{n:"Notes",s:0},{n:"Companies",s:1}]},
+    speakers:{x:60,y:780,cls:"c-blu",title:"Speaker mgmt",sub:"",int:"manual",data:[{n:"Profiles",s:0},{n:"Sessions",s:1}]},
+    programme:{x:310,y:780,cls:"c-blu",title:"Programme",sub:"",int:"api",data:[{n:"Schedule",s:0},{n:"Tracks",s:0}]},
+    av:{x:540,y:780,cls:"c-gra",title:"AV / streaming",sub:"",int:"api",data:[{n:"Recording",s:0},{n:"Livestream",s:0}]},
+    polling:{x:770,y:780,cls:"c-blu",title:"Polling / Q&A",sub:"",int:"api",data:[{n:"Polls",s:0},{n:"Questions",s:0}]},
+    venue:{x:60,y:940,cls:"c-gra",title:"Venue mgmt",sub:"",int:"manual",data:[{n:"Specs",s:0},{n:"Contractors",s:0}]},
+    capture:{x:310,y:940,cls:"c-blu",title:"Content capture",sub:"",int:"auto",data:[{n:"Recordings",s:0},{n:"Photos",s:0}]},
+    library:{x:540,y:940,cls:"c-tea",title:"On-demand library",sub:"",int:"auto",data:[{n:"Video archive",s:0},{n:"Summaries",s:0}]},
+    analytics:{x:770,y:940,cls:"c-blu",title:"Analytics / BI",sub:"",int:"api",data:[{n:"Dashboards",s:0},{n:"Reports",s:0},{n:"YoY trends",s:0}]},
+    nps:{x:310,y:1100,cls:"c-amb",title:"NPS / surveys",sub:"",int:"auto",data:[{n:"NPS scores",s:0},{n:"Ratings",s:0}]},
+    renewal:{x:540,y:1100,cls:"c-pur",title:"Renewal pipeline",sub:"",int:"auto",data:[{n:"Scores",s:0},{n:"Signals",s:0}]},
+    community:{x:60,y:1100,cls:"c-tea",title:"Community",sub:"",int:"api",data:[{n:"Year-round",s:0}]},
+    cdp:{x:770,y:1100,cls:"c-blu",title:"Data warehouse / CDP",sub:"",int:"api",data:[{n:"Unified profiles",s:1},{n:"All history",s:0}]},
+  },
+  connections:[
+    {from:"crm",to:"invoicing",type:"api"},{from:"crm",to:"exh_manual",type:"auto"},{from:"crm",to:"email",type:"api"},
+    {from:"sponsorship",to:"invoicing",type:"api"},{from:"proposals",to:"crm",type:"api"},
+    {from:"website",to:"registration",type:"api"},{from:"email",to:"registration",type:"api"},{from:"paid",to:"registration",type:"api"},
+    {from:"registration",to:"badging",type:"api"},{from:"badging",to:"access",type:"api"},{from:"access",to:"session_scan",type:"api"},
+    {from:"exh_manual",to:"floorplan",type:"api"},{from:"floorplan",to:"wayfinding",type:"api"},
+    {from:"lead_cap",to:"analytics",type:"auto"},{from:"access",to:"analytics",type:"api"},
+    {from:"speakers",to:"programme",type:"api"},{from:"programme",to:"av",type:"manual"},
+    {from:"av",to:"capture",type:"api"},{from:"capture",to:"library",type:"auto"},
+    {from:"session_scan",to:"analytics",type:"api"},{from:"nps",to:"analytics",type:"api"},
+    {from:"renewal",to:"crm",type:"auto"},{from:"analytics",to:"renewal",type:"auto"},
+    {from:"nps",to:"renewal",type:"auto"},{from:"registration",to:"cdp",type:"api"},
+    {from:"analytics",to:"cdp",type:"api"},{from:"community",to:"registration",type:"api"},
+    {from:"library",to:"analytics",type:"api"},{from:"venue",to:"floorplan",type:"manual"},
+    {from:"polling",to:"analytics",type:"auto"},{from:"social",to:"paid",type:"api"},
+    {from:"wayfinding",to:"lead_cap",type:"api"},
+  ]
+}
+};
+
+let currentView='exhibitor', zoom=1, panX=0, panY=0;
+let isPanning=false, startX=0, startY=0, startPanX=0, startPanY=0;
+let highlightedSys=null, allCollapsed=false;
+const boxElements={}, boxRects={}, collapsedState={};
+
+const container=document.getElementById('canvas-container');
+const canvas=document.getElementById('canvas');
+const svg=document.getElementById('lines-svg');
+
+function applyTransform(){
+  canvas.style.transform=`translate(${panX}px,${panY}px) scale(${zoom})`;
+  document.getElementById('zoom-display').textContent=Math.round(zoom*100)+'%';
+  updateMinimap();
+}
+
+container.addEventListener('pointerdown',e=>{
+  if(e.target.closest('.sys-box')||e.target.closest('.collapse-btn'))return;
+  isPanning=true;startX=e.clientX;startY=e.clientY;startPanX=panX;startPanY=panY;
+  container.classList.add('grabbing');container.setPointerCapture(e.pointerId);
+});
+container.addEventListener('pointermove',e=>{
+  if(!isPanning)return;
+  panX=startPanX+(e.clientX-startX);panY=startPanY+(e.clientY-startY);applyTransform();
+});
+container.addEventListener('pointerup',()=>{isPanning=false;container.classList.remove('grabbing')});
+container.addEventListener('wheel',e=>{
+  e.preventDefault();
+  const rect=container.getBoundingClientRect();
+  const mx=e.clientX-rect.left, my=e.clientY-rect.top;
+  const wx=(mx-panX)/zoom, wy=(my-panY)/zoom;
+  const d=e.deltaY>0?0.9:1.1;
+  zoom=Math.max(0.15,Math.min(3,zoom*d));
+  panX=mx-wx*zoom;panY=my-wy*zoom;
+  applyTransform();
+},{passive:false});
+
+function zoomTo(z){
+  const rect=container.getBoundingClientRect();
+  const cx=rect.width/2,cy=rect.height/2;
+  const wx=(cx-panX)/zoom,wy=(cy-panY)/zoom;
+  zoom=Math.max(0.15,Math.min(3,z));
+  panX=cx-wx*zoom;panY=cy-wy*zoom;
+  applyTransform();
+}
+
+function fitToView(){
+  const view=VIEWS[currentView];
+  let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+  Object.values(view.systems).forEach(s=>{
+    minX=Math.min(minX,s.x);minY=Math.min(minY,s.y);
+    maxX=Math.max(maxX,s.x+240);maxY=Math.max(maxY,s.y+200);
+  });
+  const rect=container.getBoundingClientRect();
+  const pad=60;
+  const w=maxX-minX+pad*2, h=maxY-minY+pad*2;
+  zoom=Math.min(rect.width/w, rect.height/h, 1.5);
+  panX=(rect.width-w*zoom)/2 - (minX-pad)*zoom;
+  panY=(rect.height-h*zoom)/2 - (minY-pad)*zoom;
+  applyTransform();
+}
+
+function getBoxRect(id){
+  const el=boxElements[id];
+  if(!el)return null;
+  const sys=VIEWS[currentView].systems[id];
+  return{x:sys.x, y:sys.y, w:el.offsetWidth, h:el.offsetHeight};
+}
+
+function getAnchor(r1,r2){
+  const c1x=r1.x+r1.w/2, c1y=r1.y+r1.h/2;
+  const c2x=r2.x+r2.w/2, c2y=r2.y+r2.h/2;
+  const dx=c2x-c1x, dy=c2y-c1y;
+  let x1,y1,x2,y2;
+  if(Math.abs(dx)>Math.abs(dy)){
+    if(dx>0){x1=r1.x+r1.w;x2=r2.x}else{x1=r1.x;x2=r2.x+r2.w}
+    y1=c1y;y2=c2y;
+  } else {
+    if(dy>0){y1=r1.y+r1.h;y2=r2.y}else{y1=r1.y;y2=r2.y+r2.h}
+    x1=c1x;x2=c2x;
+  }
+  return{x1,y1,x2,y2};
+}
+
+function drawLines(){
+  svg.innerHTML='';
+  const view=VIEWS[currentView];
+  view.connections.forEach(conn=>{
+    const r1=getBoxRect(conn.from), r2=getBoxRect(conn.to);
+    if(!r1||!r2)return;
+    const a=getAnchor(r1,r2);
+    const color=conn.type==='api'?'var(--api)':conn.type==='manual'?'var(--manual)':'var(--auto)';
+    const dash=conn.type==='api'?'':conn.type==='manual'?'8 5':'4 4';
+    const mx=(a.x1+a.x2)/2;
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('d',`M${a.x1},${a.y1} C${mx},${a.y1} ${mx},${a.y2} ${a.x2},${a.y2}`);
+    path.setAttribute('fill','none');path.setAttribute('stroke',color);path.setAttribute('stroke-width','2');
+    if(dash)path.setAttribute('stroke-dasharray',dash);
+    path.setAttribute('opacity','0.6');path.dataset.from=conn.from;path.dataset.to=conn.to;
+    svg.appendChild(path);
+    const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('cx',a.x2);circle.setAttribute('cy',a.y2);circle.setAttribute('r','4');
+    circle.setAttribute('fill',color);circle.setAttribute('opacity','0.8');
+    circle.dataset.from=conn.from;circle.dataset.to=conn.to;
+    svg.appendChild(circle);
+
+    if(conn.label){
+      const lx=(a.x1+a.x2)/2, ly=(a.y1+a.y2)/2 - 8;
+      const text=document.createElementNS('http://www.w3.org/2000/svg','text');
+      text.setAttribute('x',lx);text.setAttribute('y',ly);
+      text.setAttribute('text-anchor','middle');text.setAttribute('fill','var(--tx3)');
+      text.setAttribute('font-size','10');text.setAttribute('font-family','DM Sans,system-ui,sans-serif');
+      text.textContent=conn.label;text.dataset.from=conn.from;text.dataset.to=conn.to;
+      svg.appendChild(text);
+    }
+  });
+}
+
+function renderBoxes(){
+  Object.values(boxElements).forEach(el=>el.remove());
+  Object.keys(boxElements).forEach(k=>delete boxElements[k]);
+  highlightedSys=null;
+  document.getElementById('info-panel').classList.remove('open');
+
+  const view=VIEWS[currentView];
+  Object.entries(view.systems).forEach(([id,sys])=>{
+    const box=document.createElement('div');
+    box.className=`sys-box ${sys.cls}`;
+    box.style.left=sys.x+'px';box.style.top=sys.y+'px';
+    box.dataset.id=id;
+
+    const isCollapsed=collapsedState[currentView+'_'+id]||false;
+
+    let html=`<div class="sys-head"><div><div class="sys-title">${sys.title}</div>`;
+    if(sys.sub)html+=`<div class="sys-sub">${sys.sub}</div>`;
+    html+=`</div><button class="collapse-btn" data-id="${id}" onclick="event.stopPropagation();toggleCollapse('${id}')">${isCollapsed?'▸':'▾'}</button></div>`;
+    html+=`<div class="sys-data${isCollapsed?' collapsed':''}" id="data-${id}">`;
+    sys.data.forEach(d=>{html+=`<span class="data-pill${d.s?' shared':''}">${d.n}</span>`;});
+    html+=`</div>`;
+
+    const intCls=sys.int==='api'?'int-api':sys.int==='manual'?'int-manual':'int-auto';
+    html+=`<div class="int-badge ${intCls}"></div>`;
+
+    box.innerHTML=html;
+    box.addEventListener('click',()=>clickSystem(id));
+    canvas.appendChild(box);
+    boxElements[id]=box;
+  });
+
+  requestAnimationFrame(()=>{requestAnimationFrame(()=>{drawLines();updateMinimap()})});
+}
+
+function toggleCollapse(id){
+  const key=currentView+'_'+id;
+  collapsedState[key]=!collapsedState[key];
+  const dataEl=document.getElementById('data-'+id);
+  const btn=document.querySelector(`.collapse-btn[data-id="${id}"]`);
+  if(collapsedState[key]){dataEl.classList.add('collapsed');btn.textContent='▸';}
+  else{dataEl.classList.remove('collapsed');btn.textContent='▾';}
+  setTimeout(()=>drawLines(),310);
+}
+
+function toggleAll(){
+  allCollapsed=!allCollapsed;
+  const view=VIEWS[currentView];
+  Object.keys(view.systems).forEach(id=>{
+    const key=currentView+'_'+id;
+    collapsedState[key]=allCollapsed;
+    const dataEl=document.getElementById('data-'+id);
+    const btn=document.querySelector(`.collapse-btn[data-id="${id}"]`);
+    if(dataEl){if(allCollapsed){dataEl.classList.add('collapsed');btn.textContent='▸';}
+    else{dataEl.classList.remove('collapsed');btn.textContent='▾';}}
+  });
+  document.getElementById('collapse-all-btn').textContent=allCollapsed?'Expand all':'Collapse all';
+  setTimeout(()=>drawLines(),310);
+}
+
+function clickSystem(id){
+  const view=VIEWS[currentView];
+  if(highlightedSys===id){
+    highlightedSys=null;
+    document.querySelectorAll('.sys-box').forEach(b=>b.classList.remove('dimmed','highlight'));
+    svg.querySelectorAll('path,circle,text').forEach(p=>{
+      p.setAttribute('opacity',p.tagName==='text'?'1':'0.6');
+      if(p.tagName==='path')p.setAttribute('stroke-width','2');
+    });
+    document.getElementById('info-panel').classList.remove('open');
+    return;
+  }
+  highlightedSys=id;
+  const connected=new Set([id]);
+  const connDetails=[];
+  view.connections.forEach(c=>{
+    if(c.from===id||c.to===id){
+      connected.add(c.from);connected.add(c.to);
+      const otherId=c.from===id?c.to:c.from;
+      const dir=c.from===id?'→':'←';
+      connDetails.push({name:view.systems[otherId]?.title||otherId,type:c.type,label:c.label||'',dir});
+    }
+  });
+  document.querySelectorAll('.sys-box').forEach(b=>{
+    if(connected.has(b.dataset.id)){b.classList.remove('dimmed');b.classList.toggle('highlight',b.dataset.id===id);}
+    else{b.classList.add('dimmed');b.classList.remove('highlight');}
+  });
+  svg.querySelectorAll('path,circle,text').forEach(p=>{
+    const isConn=connected.has(p.dataset.from)&&connected.has(p.dataset.to)&&(p.dataset.from===id||p.dataset.to===id);
+    if(isConn){p.setAttribute('opacity','1');if(p.tagName==='path')p.setAttribute('stroke-width','3');}
+    else{p.setAttribute('opacity','0.06');if(p.tagName==='path')p.setAttribute('stroke-width','2');}
+  });
+
+  const panel=document.getElementById('info-panel');
+  document.getElementById('info-title').textContent=view.systems[id].title;
+  let html='';
+  connDetails.forEach(c=>{
+    const cls=c.type==='api'?'ct-api':c.type==='manual'?'ct-manual':'ct-auto';
+    const label=c.type==='api'?'API':c.type==='manual'?'Manual':'Auto';
+    html+=`<div class="conn-row"><span class="conn-tag ${cls}">${label}</span><b>${c.dir} ${c.name}</b>${c.label?' — '+c.label:''}</div>`;
+  });
+  document.getElementById('info-conns').innerHTML=html;
+  panel.classList.add('open');
+}
+
+function setView(v,btn){
+  currentView=v;allCollapsed=false;
+  document.getElementById('collapse-all-btn').textContent='Collapse all';
+  document.querySelectorAll('.tb-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderBoxes();
+  setTimeout(()=>fitToView(),50);
+}
+
+function updateMinimap(){
+  const mc=document.getElementById('minimap-canvas');
+  const ctx=mc.getContext('2d');
+  const mw=180,mh=120;mc.width=mw;mc.height=mh;
+  ctx.clearRect(0,0,mw,mh);
+
+  const view=VIEWS[currentView];
+  let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+  Object.values(view.systems).forEach(s=>{
+    minX=Math.min(minX,s.x-40);minY=Math.min(minY,s.y-40);
+    maxX=Math.max(maxX,s.x+260);maxY=Math.max(maxY,s.y+220);
+  });
+  const cw=maxX-minX,ch=maxY-minY;
+  const sc=Math.min(mw/cw,mh/ch)*0.9;
+  const ox=(mw-cw*sc)/2,oy=(mh-ch*sc)/2;
+
+  const colors={
+    'c-pur':'#7c6cf0','c-tea':'#34d399','c-cor':'#f97316','c-pin':'#f472b6',
+    'c-blu':'#60a5fa','c-gra':'#9898a4','c-amb':'#fbbf24','c-grn':'#34d399'
+  };
+
+  Object.values(view.systems).forEach(s=>{
+    const x=ox+(s.x-minX)*sc, y=oy+(s.y-minY)*sc;
+    ctx.fillStyle=colors[s.cls]||'#666';
+    ctx.globalAlpha=0.6;
+    ctx.fillRect(x,y,20*sc,12*sc);
+  });
+  ctx.globalAlpha=1;
+
+  const rect=container.getBoundingClientRect();
+  const vx=ox+(-panX/zoom-minX)*sc, vy=oy+(-panY/zoom-minY)*sc;
+  const vw=rect.width/zoom*sc, vh=rect.height/zoom*sc;
+  const vr=document.getElementById('viewport-rect');
+  vr.style.left=Math.max(0,vx)+'px';vr.style.top=Math.max(0,vy)+'px';
+  vr.style.width=Math.min(mw,vw)+'px';vr.style.height=Math.min(mh,vh)+'px';
+}
+
+document.getElementById('minimap').addEventListener('click',e=>{
+  const rect=e.currentTarget.getBoundingClientRect();
+  const mx=e.clientX-rect.left, my=e.clientY-rect.top;
+  const mw=180,mh=120;
+
+  const view=VIEWS[currentView];
+  let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+  Object.values(view.systems).forEach(s=>{
+    minX=Math.min(minX,s.x-40);minY=Math.min(minY,s.y-40);
+    maxX=Math.max(maxX,s.x+260);maxY=Math.max(maxY,s.y+220);
+  });
+  const cw=maxX-minX,ch=maxY-minY;
+  const sc=Math.min(mw/cw,mh/ch)*0.9;
+  const ox=(mw-cw*sc)/2,oy=(mh-ch*sc)/2;
+
+  const canvasX=(mx-ox)/sc+minX;
+  const canvasY=(my-oy)/sc+minY;
+  const cr=container.getBoundingClientRect();
+  panX=-canvasX*zoom+cr.width/2;
+  panY=-canvasY*zoom+cr.height/2;
+  applyTransform();
+});
+
+setTimeout(()=>{document.getElementById('help-hint').style.opacity='0'},4000);
+
+renderBoxes();
+setTimeout(()=>fitToView(),100);
+</script>
+</body>
+</html>

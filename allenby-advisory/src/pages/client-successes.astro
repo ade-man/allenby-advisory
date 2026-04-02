@@ -1,0 +1,406 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import CaseCard from '../components/CaseCard.astro';
+import MetricBox from '../components/MetricBox.astro';
+---
+
+<Base
+  title="Client Successes"
+  description="How Allenby Advisory has helped event teams solve real technology challenges."
+>
+  <Nav />
+
+  <main>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+      <div class="section-inner">
+        <SectionLabel text="Our work" />
+        <h1 class="page-h1">Client Successes</h1>
+        <p class="page-intro">Every project starts with a problem. Here's how we've helped event teams solve theirs.</p>
+      </div>
+    </section>
+
+    <!-- PROJECT INDEX -->
+    <section>
+      <div class="section-inner">
+        <p class="index-label">All projects</p>
+        <div class="two-col-grid">
+          <CaseCard
+            result="100% growth in app adoption"
+            title="Equiphotel Paris — Visitor Navigation"
+            eventTag="Paris · Trade show · 6 halls"
+            body="Turned persistent negative visitor feedback on navigation into a validated, multi-year improvement programme."
+            href="#equiphotel"
+          />
+          <CaseCard
+            result="Serious meetings. Party atmosphere."
+            title="Imbibe Live London — 1-2-1 Meetings"
+            eventTag="London · On-trade drinks show · B2B"
+            body="Delivered structured, measurable business meetings inside a show known for its vibrant, sociable atmosphere."
+            href="#imbibe"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CASE STUDY 1 — EQUIPHOTEL
+         ============================================================ -->
+    <div id="equiphotel" class="case-study">
+
+      <!-- Top section -->
+      <section class="case-top reveal">
+        <div class="case-top-inner">
+          <div class="case-text">
+            <p class="case-eyebrow">Case study — project delivery</p>
+            <h2 class="case-h2">Equiphotel Paris: Visitor Navigation Strategy</h2>
+            <p class="case-intro">We turned one of the event's most persistent pain points — visitor navigation across a 6-hall, 3-floor venue — into a measurable, multi-year improvement programme.</p>
+            <Button label="Get in touch about a similar project" href="/#contact" />
+          </div>
+          <div class="meta-card">
+            <div class="meta-items">
+              <div class="meta-item">
+                <span class="meta-label">Event</span>
+                <span class="meta-value">Equiphotel Paris</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Venue</span>
+                <span class="meta-value">Porte de Versailles</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Service type</span>
+                <span class="meta-value">Project delivery</span>
+              </div>
+            </div>
+            <MetricBox number="100%" description="Growth in app adoption" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Body columns -->
+      <section class="case-body">
+        <div class="grid-separator body-grid">
+          <div class="body-col">
+            <p class="col-header">The challenge</p>
+            <p>Post-event surveys consistently flagged navigation as a source of visitor dissatisfaction. The signage budget had been reduced — the team hoped a digital solution could fill the gap for less cost.</p>
+          </div>
+          <div class="body-col">
+            <p class="col-header">What we did</p>
+            <p>Developed a multi-channel strategy centred on a clearly-positioned "Navigation App" with an interactive floorplan, supported by visible concierge hosts at key locations. Engaged the Global Research team to conduct onsite visitor interviews — building an evidence base for ongoing investment.</p>
+          </div>
+          <div class="body-col">
+            <p class="col-header">The results</p>
+            <p>Twice as many visitors used the navigation app versus the previous year. Onsite research validated the importance of physical signage and produced a clear multi-year roadmap including blue-dot indoor positioning.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quote -->
+      <section class="case-quote">
+        <div class="section-inner">
+          <blockquote class="cs-blockquote">
+            "Grip was the ideal solution to introduce both an app and a matchmaking solution to the young and mobile Imbibe Live audience. We needed a solution which would work easily through their phones."
+          </blockquote>
+          <cite class="cs-cite">Sonja Van Praag — Publishing & Events Director, Imbibe</cite>
+        </div>
+      </section>
+
+      <!-- Role strip -->
+      <section class="role-strip">
+        <div class="section-inner">
+          <p class="role-text"><span class="role-label">Ade's role:</span> Product strategy, customer communication strategy, defining the research brief, onboarding the app vendor, and supporting the team through end-to-end delivery.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ============================================================
+         CASE STUDY 2 — IMBIBE LIVE
+         ============================================================ -->
+    <div id="imbibe" class="case-study">
+
+      <!-- Top section -->
+      <section class="case-top reveal">
+        <div class="case-top-inner">
+          <div class="case-text">
+            <p class="case-eyebrow">Case study — project delivery</p>
+            <h2 class="case-h2">Imbibe Live London: 1-2-1 Meetings Programme</h2>
+            <p class="case-intro">We helped a show known for its convivial atmosphere deliver a high-functioning meetings programme for its most commercially important attendees.</p>
+            <Button label="Get in touch about a similar project" href="/#contact" />
+          </div>
+          <div class="meta-card">
+            <div class="meta-items">
+              <div class="meta-item">
+                <span class="meta-label">Event</span>
+                <span class="meta-value">Imbibe Live London</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Venue</span>
+                <span class="meta-value">Olympia London</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Service type</span>
+                <span class="meta-value">Project delivery</span>
+              </div>
+            </div>
+            <MetricBox number="B2B" description="Meetings programme delivered" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Body columns -->
+      <section class="case-body">
+        <div class="grid-separator body-grid">
+          <div class="body-col">
+            <p class="col-header">The challenge</p>
+            <p>Imbibe Live is the on-trade drinks show — brands and suppliers meet the owners, managers and staff of restaurants, bars and pubs. The event has a reputation for being convivial and fun. The challenge: how do you run credible, productive business meetings in an atmosphere increasingly dominated by tastings and socialising?</p>
+          </div>
+          <div class="body-col">
+            <p class="col-header">What we did</p>
+            <p>Working with the Imbibe event team and the RXUK Digital team, we scoped and implemented the Grip matchmaking app, supported by the creation of a dedicated networking lounge. The app allowed attendees to get personalised suggestions of who to meet, pre-schedule meetings, or arrange them spontaneously on the day.</p>
+          </div>
+          <div class="body-col">
+            <p class="col-header">The results</p>
+            <p>The programme successfully enabled the event's target VIP buyer audience to have structured, productive meetings in an environment designed for the purpose. The concierge function added genuine value — intervening when meetings were at risk and capturing real-time feedback from users.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quote -->
+      <section class="case-quote">
+        <div class="section-inner">
+          <blockquote class="cs-blockquote">
+            "Grip was the ideal solution to introduce both an app and a matchmaking solution to the young and mobile Imbibe Live audience. We needed a solution which would work easily through their phones, especially as due to the nature of their jobs they are not at their desks very often."
+          </blockquote>
+          <cite class="cs-cite">Sonja Van Praag — Publishing & Events Director, Imbibe</cite>
+        </div>
+      </section>
+
+      <!-- Role strip -->
+      <section class="role-strip">
+        <div class="section-inner">
+          <p class="role-text"><span class="role-label">Ade's role:</span> Product strategy, customer communication strategy, onboarding the app vendor, and supporting the team through end-to-end delivery.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- FOOTER CTA -->
+    <div class="dark-section">
+      <div class="cta-inner">
+        <h2>Working on Something Similar?</h2>
+        <p>Whether you're launching a meetings programme, tackling navigation, or thinking through your next digital initiative — we'd welcome the conversation.</p>
+        <div style="margin-top: 32px;">
+          <Button label="Book a free 30-minute call" href="/#contact" variant="light" />
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .page-header { background: var(--offwhite); }
+
+  .page-h1 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 1.06;
+    letter-spacing: 0.01em;
+    color: var(--charcoal);
+    margin-bottom: var(--space-md);
+  }
+
+  .page-intro {
+    max-width: 560px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--body);
+  }
+
+  .index-label {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+    margin-bottom: 24px;
+  }
+
+  .two-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  /* Case study wrapper */
+  .case-study {
+    border-top: 3px solid var(--lightgrey);
+  }
+
+  /* Top section */
+  .case-top { background: var(--white); }
+
+  .case-top-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-lg);
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  .case-eyebrow {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+    margin-bottom: 16px;
+  }
+
+  .case-h2 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    color: var(--charcoal);
+    margin-bottom: 16px;
+    max-width: 540px;
+  }
+
+  .case-intro {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--body);
+    margin-bottom: 28px;
+    max-width: 520px;
+  }
+
+  /* Meta card */
+  .meta-card {
+    background: var(--offwhite);
+    border: 0.5px solid var(--lightgrey);
+    padding: 22px;
+  }
+
+  .meta-items { margin-bottom: 16px; }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+    border-bottom: 0.5px solid var(--lightgrey);
+  }
+
+  .meta-label {
+    font-family: 'Archivo', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+    margin-bottom: 2px;
+  }
+
+  .meta-value {
+    font-size: 13px;
+    color: var(--charcoal);
+    font-weight: 700;
+  }
+
+  /* Body columns */
+  .case-body { background: var(--offwhite); }
+
+  .body-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .body-col {
+    padding: var(--space-lg) 28px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--body);
+  }
+
+  .col-header {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+    margin-bottom: 12px;
+  }
+
+  /* Quote */
+  .case-quote { background: var(--offwhite); border-top: 0.5px solid var(--lightgrey); }
+
+  .cs-blockquote {
+    font-family: 'Archivo', sans-serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--charcoal);
+    border-left: 3px solid var(--accent);
+    padding-left: 20px;
+    max-width: 600px;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  .cs-cite {
+    display: block;
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+    font-style: normal;
+    padding-left: 23px;
+  }
+
+  /* Role strip */
+  .role-strip { background: var(--white); border-top: 0.5px solid var(--lightgrey); }
+
+  .role-text {
+    font-size: 13px;
+    color: var(--body);
+    max-width: 680px;
+  }
+
+  .role-label {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    font-weight: 700;
+  }
+
+  /* Footer CTA */
+  .dark-section { padding: var(--space-2xl) 0; }
+
+  .cta-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-h1 { font-size: 34px; }
+    .two-col-grid { grid-template-columns: 1fr; }
+    .case-top-inner { grid-template-columns: 1fr; }
+    .body-grid { grid-template-columns: 1fr; }
+  }
+</style>

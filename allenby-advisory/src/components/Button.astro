@@ -1,0 +1,58 @@
+---
+interface Props {
+  label: string;
+  href: string;
+  variant?: 'primary' | 'ghost' | 'light';
+}
+
+const { label, href, variant = 'primary' } = Astro.props;
+---
+
+<a href={href} class={`btn btn--${variant}`}>{label}</a>
+
+<style>
+  .btn {
+    display: inline-block;
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* Primary: dark background */
+  .btn--primary {
+    background: var(--charcoal);
+    color: var(--white);
+    padding: 13px 28px;
+  }
+
+  .btn--primary:hover {
+    background: #333;
+  }
+
+  /* Ghost: no background, subdued */
+  .btn--ghost {
+    background: none;
+    color: var(--midgrey);
+    padding: 13px 0;
+    border-bottom: 0.5px solid var(--lightgrey);
+  }
+
+  .btn--ghost:hover {
+    color: var(--charcoal);
+    border-bottom-color: var(--charcoal);
+  }
+
+  /* Light: white background, for use on dark sections */
+  .btn--light {
+    background: var(--white);
+    color: var(--charcoal);
+    padding: 13px 28px;
+  }
+
+  .btn--light:hover {
+    background: var(--offwhite);
+  }
+</style>

@@ -1,0 +1,40 @@
+---
+interface Props {
+  number: string;
+  description: string;
+}
+
+const { number, description } = Astro.props;
+---
+
+<div class="metric-box">
+  <span class="metric-num">{number}</span>
+  <p class="metric-desc">{description}</p>
+</div>
+
+<style>
+  .metric-box {
+    background: var(--charcoal);
+    padding: 16px;
+    display: inline-block;
+  }
+
+  .metric-num {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: var(--white);
+    display: block;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+  }
+
+  .metric-desc {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: #888780;
+    margin-top: 4px;
+  }
+</style>

@@ -1,0 +1,45 @@
+---
+interface Props {
+  quote: string;
+  name: string;
+  role: string;
+}
+
+const { quote, name, role } = Astro.props;
+---
+
+<div class="testimonial reveal">
+  <blockquote>{quote}</blockquote>
+  <cite>{name} &mdash; {role}</cite>
+</div>
+
+<style>
+  .testimonial {
+    background: var(--white);
+    border: 0.5px solid var(--lightgrey);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  blockquote {
+    font-family: 'Archivo', sans-serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--charcoal);
+    line-height: 1.7;
+    border-left: 2px solid var(--accent);
+    padding-left: 16px;
+    margin: 0;
+  }
+
+  cite {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+    font-style: normal;
+  }
+</style>

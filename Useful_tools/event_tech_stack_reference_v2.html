@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Tech Stack Reference</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f4f0;
+    --color-background-tertiary: #eeede9;
+    --color-text-primary: #1a1a18;
+    --color-text-secondary: #6b6b66;
+    --color-border-tertiary: rgba(0,0,0,0.1);
+    --color-border-secondary: rgba(0,0,0,0.2);
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-background-primary: #1c1c1a;
+      --color-background-secondary: #252523;
+      --color-background-tertiary: #2e2e2b;
+      --color-text-primary: #e8e6df;
+      --color-text-secondary: #9c9a92;
+      --color-border-tertiary: rgba(255,255,255,0.1);
+      --color-border-secondary: rgba(255,255,255,0.2);
+    }
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-background-tertiary);
+    color: var(--color-text-primary);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    background: var(--color-background-primary);
+    border-radius: var(--border-radius-lg);
+    border: 0.5px solid var(--color-border-tertiary);
+    padding: 2rem;
+  }
+
+  .page-title { font-size: 22px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+  .page-sub { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 1.5rem; }
+
+  .event-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .tab {
+    padding: 7px 14px; border-radius: 20px; font-size: 13px; font-weight: 500;
+    cursor: pointer; border: 1.5px solid transparent; transition: all 0.18s;
+    font-family: var(--font-sans); background: var(--color-background-secondary); color: var(--color-text-secondary);
+  }
+  .tab:hover { background: var(--color-background-tertiary); color: var(--color-text-primary); }
+  .tab.active { background: var(--tab-bg); color: var(--tab-color); border-color: var(--tab-border); }
+
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--color-text-secondary); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .tier-core { background: #2ecc71; }
+  .tier-recommended { background: #f39c12; }
+  .tier-optional { background: var(--color-border-secondary); }
+
+  .event-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 0.75rem; }
+  .meta-pill { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-family: var(--font-mono); }
+
+  .complexity-bar { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--color-text-secondary); margin-bottom: 1rem; }
+  .bar-track { flex: 1; height: 4px; background: var(--color-border-tertiary); border-radius: 2px; max-width: 140px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 2px; transition: width 0.4s ease; }
+
+  .compare-note {
+    background: var(--color-background-secondary);
+    border-left: 3px solid var(--accent-color, var(--color-border-secondary));
+    padding: 10px 14px; border-radius: 0 8px 8px 0;
+    font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1.25rem;
+  }
+  .compare-note strong { color: var(--color-text-primary); font-weight: 500; }
+
+  .section-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-text-secondary); margin-bottom: 8px; }
+
+  .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+
+  .category-card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 14px 14px 10px;
+    border-top: 3px solid var(--cat-color, var(--color-border-secondary));
+  }
+
+  .category-title { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-secondary); margin-bottom: 10px; }
+
+  .feature-row {
+    padding: 7px 0;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+  .feature-row:last-child { border-bottom: none; }
+
+  .feature-top { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 3px; }
+  .tier-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+
+  .feature-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); line-height: 1.3; }
+
+  .supplier-line { display: flex; align-items: flex-start; gap: 5px; padding-left: 16px; margin-top: 2px; }
+  .supplier-label { font-size: 11px; color: var(--color-text-secondary); font-family: var(--font-mono); flex-shrink: 0; }
+  .supplier-names { font-size: 11px; color: var(--color-text-secondary); font-style: italic; line-height: 1.4; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="page-title">Event Tech Stack Reference</div>
+  <div class="page-sub">Recommended tools by event format</div>
+
+  <div class="event-tabs" id="tabs"></div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot tier-core"></div>Core — essential</div>
+    <div class="legend-item"><div class="legend-dot tier-recommended"></div>Recommended — adds value</div>
+    <div class="legend-item"><div class="legend-dot tier-optional"></div>Optional — scale dependent</div>
+  </div>
+
+  <div class="event-meta" id="meta"></div>
+  <div class="complexity-bar" id="complexity"></div>
+  <div class="compare-note" id="keynote"></div>
+  <div class="section-label">Tech stack by category</div>
+  <div class="stack-grid" id="grid"></div>
+</div>
+
+<script>
+const events = [
+  {
+    id: 'conference',
+    label: 'Conference',
+    color: { bg: '#E6F1FB', border: '#185FA5', text: '#042C53', accent: '#185FA5', bar: '#185FA5' },
+    meta: [
+      { label: '200–5,000 attendees', bg: '#E6F1FB', color: '#185FA5' },
+      { label: 'Multi-day', bg: '#E6F1FB', color: '#185FA5' },
+      { label: 'Multi-track', bg: '#E6F1FB', color: '#185FA5' },
+    ],
+    complexity: 85,
+    note: '<strong>Conferences</strong> need the deepest stack — content scheduling, speaker management, multi-track streaming, and robust networking features. Budget-wise the most tool-heavy format.',
+    categories: [
+      {
+        title: 'Registration & Ticketing', color: '#185FA5',
+        tools: [
+          { name: 'Registration with complex ticket tiers & promo codes', suppliers: 'Cvent, Eventbrite, Swoogo', tier: 'core' },
+          { name: 'Group booking & invoice management', suppliers: 'RegFox, Cvent', tier: 'recommended' },
+          { name: 'Waitlist & capacity management', suppliers: 'Eventbrite, RSVPify', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Event App & Agenda', color: '#185FA5',
+        tools: [
+          { name: 'Personalised agenda builder & schedule', suppliers: 'Whova, CrowdComms', tier: 'core' },
+          { name: 'Branded native app with offline access', suppliers: 'Attendify, Guidebook', tier: 'recommended' },
+          { name: 'Live updates & push notifications', suppliers: 'Whova, CrowdComms', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Streaming & AV', color: '#185FA5',
+        tools: [
+          { name: 'On-site AV production & staging', suppliers: 'Encore, Freeman', tier: 'core' },
+          { name: 'Hybrid broadcast & live streaming', suppliers: 'Vimeo, StreamYard', tier: 'recommended' },
+          { name: 'Overflow & satellite room management', suppliers: 'Zoom Webinars', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Networking', color: '#185FA5',
+        tools: [
+          { name: 'AI-powered attendee matchmaking', suppliers: 'Brella, Grip', tier: 'core' },
+          { name: 'Lead scanning & digital business cards', suppliers: 'Swapcard', tier: 'recommended' },
+          { name: 'Structured meal & social networking', suppliers: 'Lunchpool', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Content & Sessions', color: '#185FA5',
+        tools: [
+          { name: 'Call for papers, speaker portal & schedule builder', suppliers: 'Sessionboard, Lineup Ninja', tier: 'core' },
+          { name: 'Live Q&A, polls & audience interaction', suppliers: 'Slido', tier: 'recommended' },
+          { name: 'Interactive slides & sentiment capture', suppliers: 'Mentimeter', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Sponsor & Expo', color: '#185FA5',
+        tools: [
+          { name: 'Exhibitor portal & booth management', suppliers: 'Cvent Exhibitor', tier: 'core' },
+          { name: 'Interactive floorplan & space booking', suppliers: 'Map Dynamics, Expofp', tier: 'recommended' },
+          { name: 'Lead retrieval for exhibitors', suppliers: 'Scan2Lead', tier: 'optional' },
+        ]
+      },
+    ]
+  },
+  {
+    id: 'exhibition',
+    label: 'Exhibition / Trade Show',
+    color: { bg: '#E1F5EE', border: '#0F6E56', text: '#04342C', accent: '#0F6E56', bar: '#0F6E56' },
+    meta: [
+      { label: '500–50,000 attendees', bg: '#E1F5EE', color: '#0F6E56' },
+      { label: 'Expo floor focus', bg: '#E1F5EE', color: '#0F6E56' },
+      { label: 'B2B lead gen', bg: '#E1F5EE', color: '#0F6E56' },
+    ],
+    complexity: 90,
+    note: '<strong>Exhibitions</strong> are operationally the most complex — floor logistics, exhibitor portals, badge scanning, and lead retrieval dominate the stack. Registration is high-volume with complex access tiers.',
+    categories: [
+      {
+        title: 'Registration & Badging', color: '#0F6E56',
+        tools: [
+          { name: 'High-volume registration with access tiers', suppliers: 'Cvent, Livebuzz', tier: 'core' },
+          { name: 'On-demand badge printing & self-serve kiosks', suppliers: 'Boomset, Fielddrive', tier: 'core' },
+          { name: 'Pre-registered fast-lane check-in', suppliers: 'Livebuzz, Boomset', tier: 'recommended' },
+        ]
+      },
+      {
+        title: 'Floor & Exhibitor Mgmt', color: '#0F6E56',
+        tools: [
+          { name: 'Interactive floorplan & booth booking', suppliers: 'A2Z Events, Mapyourshow', tier: 'core' },
+          { name: 'Exhibitor portal with service orders', suppliers: 'Ungerboeck, A2Z Events', tier: 'recommended' },
+          { name: 'Digital booth & virtual floor extension', suppliers: 'Expofp', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Lead Retrieval', color: '#0F6E56',
+        tools: [
+          { name: 'Badge scanning with qualifier questions', suppliers: 'Scan2Lead, iCapture', tier: 'core' },
+          { name: 'Real-time CRM sync for exhibitors', suppliers: 'Scan2Lead, Cvent LeadCapture', tier: 'recommended' },
+          { name: 'Offline scanning & post-show export', suppliers: 'Scan2Lead', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'On-site Operations', color: '#0F6E56',
+        tools: [
+          { name: 'Real-time attendance & footfall tracking', suppliers: 'atEvent, Fielddrive', tier: 'core' },
+          { name: 'Session scanning & capacity control', suppliers: 'Boomset, Livebuzz', tier: 'recommended' },
+          { name: 'Wayfinding & digital signage', suppliers: 'Mapyourshow', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Attendee App', color: '#0F6E56',
+        tools: [
+          { name: 'Floor navigation & exhibitor directory', suppliers: 'Whova, Swapcard', tier: 'core' },
+          { name: 'AI meeting scheduling between attendees', suppliers: 'Grip', tier: 'recommended' },
+          { name: 'Hosted buyer programme management', suppliers: 'Brella', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Data & Analytics', color: '#0F6E56',
+        tools: [
+          { name: 'Lead & attendance data into CRM', suppliers: 'Salesforce, HubSpot', tier: 'core' },
+          { name: 'Post-show exhibitor ROI reporting', suppliers: 'Tableau, Looker', tier: 'recommended' },
+          { name: 'Real-time event performance dashboards', suppliers: 'Aventri Analytics', tier: 'optional' },
+        ]
+      },
+    ]
+  },
+  {
+    id: 'summit',
+    label: 'Summit / Forum',
+    color: { bg: '#EEEDFE', border: '#534AB7', text: '#26215C', accent: '#534AB7', bar: '#534AB7' },
+    meta: [
+      { label: '50–500 attendees', bg: '#EEEDFE', color: '#534AB7' },
+      { label: 'Curated & invite-only', bg: '#EEEDFE', color: '#534AB7' },
+      { label: 'High-value networking', bg: '#EEEDFE', color: '#534AB7' },
+    ],
+    complexity: 55,
+    note: '<strong>Summits</strong> are lean and high-touch. The stack is smaller — premium registration, 1:1 meeting tools, and a polished event app. Less infrastructure, more relationship quality.',
+    categories: [
+      {
+        title: 'Registration', color: '#534AB7',
+        tools: [
+          { name: 'Gated invite-only registration with approval flow', suppliers: 'Cvent, Splash, RSVPify', tier: 'core' },
+          { name: 'Personalised attendee portal & concierge comms', suppliers: 'Bizzabo, Goldcast', tier: 'recommended' },
+          { name: 'Travel & accommodation coordination', suppliers: 'Cvent Passkey', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Meeting Scheduling', color: '#534AB7',
+        tools: [
+          { name: '1:1 hosted meetings & roundtable management', suppliers: 'Brella, Grip', tier: 'core' },
+          { name: 'Pre-event meeting booking for attendees', suppliers: 'Calendly Teams', tier: 'recommended' },
+          { name: 'Hosted buyer programme with meeting targets', suppliers: 'SummitSync', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Content & Sessions', color: '#534AB7',
+        tools: [
+          { name: 'Moderated live Q&A & audience polling', suppliers: 'Slido, Pigeonhole', tier: 'core' },
+          { name: 'Speaker portal & session management', suppliers: 'Sessionboard, Lineup Ninja', tier: 'recommended' },
+          { name: 'Keynote interaction & word clouds', suppliers: 'Mentimeter', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Streaming (if hybrid)', color: '#534AB7',
+        tools: [
+          { name: 'Breakout rooms & virtual participation', suppliers: 'Zoom, Teams', tier: 'core' },
+          { name: 'Studio-quality hybrid broadcast', suppliers: 'Goldcast, CrowdComms', tier: 'recommended' },
+          { name: 'Virtual networking for remote attendees', suppliers: 'CrowdComms', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Comms & Concierge', color: '#534AB7',
+        tools: [
+          { name: 'Personalised pre & post event communications', suppliers: 'Cvent Email, Stova', tier: 'core' },
+          { name: 'VIP updates & real-time alerts', suppliers: 'WhatsApp Business', tier: 'recommended' },
+          { name: 'White-glove attendee portal', suppliers: 'Bizzabo', tier: 'optional' },
+        ]
+      },
+    ]
+  },
+  {
+    id: 'awards',
+    label: 'Awards Ceremony',
+    color: { bg: '#FAEEDA', border: '#854F0B', text: '#412402', accent: '#BA7517', bar: '#EF9F27' },
+    meta: [
+      { label: '100–1,500 attendees', bg: '#FAEEDA', color: '#854F0B' },
+      { label: 'Gala dinner format', bg: '#FAEEDA', color: '#854F0B' },
+      { label: 'Brand & prestige focus', bg: '#FAEEDA', color: '#854F0B' },
+    ],
+    complexity: 45,
+    note: '<strong>Awards</strong> need a submission and judging platform as the centrepiece, plus a slick evening check-in experience. The stack is thinner than conferences but nominations and voting add unique complexity.',
+    categories: [
+      {
+        title: 'Submissions & Judging', color: '#BA7517',
+        tools: [
+          { name: 'Online entry forms with category management', suppliers: 'AwardForce, Evessio', tier: 'core' },
+          { name: 'Judging portal with scoring & conflict management', suppliers: 'Evessio, FluidReview', tier: 'recommended' },
+          { name: 'Shortlist management & finalist comms', suppliers: 'Evessio, Submittable', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Registration & RSVP', color: '#BA7517',
+        tools: [
+          { name: 'Evening registration with table & dietary preferences', suppliers: 'Splash, Eventbrite', tier: 'core' },
+          { name: 'Gated finalist & VIP invitation management', suppliers: 'RSVPify, Bizzabo', tier: 'recommended' },
+          { name: 'Group table booking & invoice management', suppliers: 'Eventbrite', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'On-site Experience', color: '#BA7517',
+        tools: [
+          { name: 'Fast glamorous check-in & badge collection', suppliers: 'Boomset, Fielddrive', tier: 'core' },
+          { name: 'Seating plan & table management', suppliers: 'Social Tables, Allseated', tier: 'recommended' },
+          { name: 'Photo opportunity & branded photo booth', suppliers: 'Snapbar', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Live Show & Broadcast', color: '#BA7517',
+        tools: [
+          { name: 'Full AV production, lighting & staging', suppliers: 'Encore, TVS', tier: 'core' },
+          { name: 'Livestream & on-demand VOD for non-attendees', suppliers: 'StreamYard, Vimeo', tier: 'recommended' },
+          { name: 'Social media clipping & highlights', suppliers: 'Grabyo', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Voting & Audience', color: '#BA7517',
+        tools: [
+          { name: 'Live audience & public vote during the show', suppliers: 'Slido', tier: 'core' },
+          { name: 'Projected live results on screen', suppliers: 'Poll Everywhere', tier: 'recommended' },
+          { name: 'Animated winner reveals & countdowns', suppliers: 'Mentimeter', tier: 'optional' },
+        ]
+      },
+    ]
+  },
+  {
+    id: 'webinar',
+    label: 'Webinar / Virtual',
+    color: { bg: '#FAECE7', border: '#993C1D', text: '#4A1B0C', accent: '#D85A30', bar: '#D85A30' },
+    meta: [
+      { label: 'Any scale', bg: '#FAECE7', color: '#993C1D' },
+      { label: 'Fully virtual', bg: '#FAECE7', color: '#993C1D' },
+      { label: 'Lead gen focus', bg: '#FAECE7', color: '#993C1D' },
+    ],
+    complexity: 30,
+    note: '<strong>Webinars</strong> are the leanest format — one platform often covers registration, delivery, and recording. Complexity comes from demand gen integration rather than logistics.',
+    categories: [
+      {
+        title: 'Webinar Platform', color: '#D85A30',
+        tools: [
+          { name: 'Live webinar delivery with Q&A & chat', suppliers: 'Zoom Webinars, ON24', tier: 'core' },
+          { name: 'Marketing-first experience with CTAs', suppliers: 'Goldcast, Demio', tier: 'recommended' },
+          { name: 'Automated & on-demand webinar playback', suppliers: 'ON24, EverWebinar', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Registration & Email', color: '#D85A30',
+        tools: [
+          { name: 'Landing page with registration form', suppliers: 'HubSpot, Marketo', tier: 'core' },
+          { name: 'Reminder & follow-up email sequences', suppliers: 'Mailchimp, HubSpot', tier: 'recommended' },
+          { name: 'Custom branded registration experience', suppliers: 'Typeform', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Engagement', color: '#D85A30',
+        tools: [
+          { name: 'Live polls, Q&A & hand-raise management', suppliers: 'Slido, Zoom Polls', tier: 'core' },
+          { name: 'Moderated live chat & reactions', suppliers: 'Platform native', tier: 'recommended' },
+          { name: 'Gamified quizzes & knowledge checks', suppliers: 'Kahoot!', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Recording & Content', color: '#D85A30',
+        tools: [
+          { name: 'Gated on-demand recording hosting', suppliers: 'Vimeo, Wistia', tier: 'core' },
+          { name: 'Video editing & content repurposing', suppliers: 'Descript', tier: 'recommended' },
+          { name: 'Auto-transcription & closed captions', suppliers: 'Otter.ai', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'CRM & Analytics', color: '#D85A30',
+        tools: [
+          { name: 'Attendance & engagement data into CRM', suppliers: 'Salesforce, HubSpot', tier: 'core' },
+          { name: 'Registration & drop-off funnel analytics', suppliers: 'Google Analytics', tier: 'recommended' },
+          { name: 'Personalised follow-up by engagement score', suppliers: 'Mutiny', tier: 'optional' },
+        ]
+      },
+    ]
+  },
+  {
+    id: 'roadshow',
+    label: 'Roadshow / Series',
+    color: { bg: '#EAF3DE', border: '#3B6D11', text: '#173404', accent: '#3B6D11', bar: '#639922' },
+    meta: [
+      { label: '3–20 cities', bg: '#EAF3DE', color: '#3B6D11' },
+      { label: 'Repeating format', bg: '#EAF3DE', color: '#3B6D11' },
+      { label: 'Consistent branding', bg: '#EAF3DE', color: '#3B6D11' },
+    ],
+    complexity: 65,
+    note: '<strong>Roadshows</strong> need tools that scale across dates and cities — clone-able templates, centralised reporting, and on-site logistics that pack down quickly. CRM sync across all legs is critical.',
+    categories: [
+      {
+        title: 'Multi-event Registration', color: '#3B6D11',
+        tools: [
+          { name: 'Series event management with cloneable templates', suppliers: 'Cvent, Bizzabo', tier: 'core' },
+          { name: 'City-by-city landing pages & registration', suppliers: 'Splash, Eventbrite', tier: 'recommended' },
+          { name: 'Centralised attendee profile across all legs', suppliers: 'Cvent', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'On-site Operations', color: '#3B6D11',
+        tools: [
+          { name: 'Portable self-serve check-in kit', suppliers: 'Boomset, Fielddrive', tier: 'core' },
+          { name: 'VIP & guest list management on the door', suppliers: 'Zkipster', tier: 'recommended' },
+          { name: 'Light event app for each city', suppliers: 'Attendify, CrowdComms', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Comms & Automation', color: '#3B6D11',
+        tools: [
+          { name: 'Per-city automated email nurture flows', suppliers: 'HubSpot, Marketo', tier: 'core' },
+          { name: 'Salesforce-aligned campaign attribution', suppliers: 'Pardot', tier: 'recommended' },
+          { name: 'Simple bulk send for smaller legs', suppliers: 'Mailchimp', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Streaming (optional)', color: '#3B6D11',
+        tools: [
+          { name: 'Remote presenter joining a live city event', suppliers: 'StreamYard', tier: 'recommended' },
+          { name: 'Hybrid leg with virtual attendance option', suppliers: 'Zoom Events, CrowdComms', tier: 'optional' },
+        ]
+      },
+      {
+        title: 'Reporting & CRM', color: '#3B6D11',
+        tools: [
+          { name: 'Cross-city attendance & lead attribution', suppliers: 'Salesforce, HubSpot', tier: 'core' },
+          { name: 'Series-level dashboard across all legs', suppliers: 'Cvent Reports', tier: 'recommended' },
+          { name: 'Multi-leg performance analysis & benchmarking', suppliers: 'Tableau', tier: 'optional' },
+        ]
+      },
+    ]
+  },
+];
+
+function renderEvent(ev) {
+  document.getElementById('meta').innerHTML = ev.meta.map(m =>
+    `<span class="meta-pill" style="background:${m.bg};color:${m.color}">${m.label}</span>`
+  ).join('');
+
+  document.getElementById('complexity').innerHTML = `
+    <span>Stack complexity</span>
+    <div class="bar-track"><div class="bar-fill" style="width:${ev.complexity}%;background:${ev.color.bar}"></div></div>
+    <span style="font-size:12px;font-family:var(--font-mono)">${ev.complexity}/100</span>
+  `;
+
+  const note = document.getElementById('keynote');
+  note.innerHTML = ev.note;
+  note.style.setProperty('--accent-color', ev.color.accent);
+
+  document.getElementById('grid').innerHTML = ev.categories.map(cat => `
+    <div class="category-card" style="--cat-color:${cat.color}">
+      <div class="category-title">${cat.title}</div>
+      ${cat.tools.map(t => `
+        <div class="feature-row">
+          <div class="feature-top">
+            <div class="tier-dot tier-${t.tier}"></div>
+            <div class="feature-name">${t.name}</div>
+          </div>
+          <div class="supplier-line">
+            <span class="supplier-label">e.g.</span>
+            <span class="supplier-names">${t.suppliers}</span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+function renderTabs(active) {
+  document.getElementById('tabs').innerHTML = events.map(ev => `
+    <button class="tab ${ev.id === active ? 'active' : ''}"
+      style="--tab-bg:${ev.color.bg};--tab-color:${ev.color.text};--tab-border:${ev.color.border}"
+      onclick="selectEvent('${ev.id}')">${ev.label}</button>
+  `).join('');
+}
+
+function selectEvent(id) {
+  const ev = events.find(e => e.id === id);
+  if (!ev) return;
+  renderTabs(id);
+  renderEvent(ev);
+}
+
+selectEvent('conference');
+</script>
+</body>
+</html>

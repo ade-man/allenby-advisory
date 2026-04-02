@@ -1,0 +1,380 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import ServiceTile from '../components/ServiceTile.astro';
+import CaseCard from '../components/CaseCard.astro';
+import Testimonial from '../components/Testimonial.astro';
+import InsightItem from '../components/InsightItem.astro';
+---
+
+<Base
+  title="Home"
+  description="Allenby Advisory helps event leaders choose, implement and get results from the right event technology."
+>
+  <Nav />
+
+  <main>
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="hero-section">
+      <div class="section-inner">
+        <SectionLabel text="Event technology and digital" />
+        <h1 class="hero-h1 animate-slide-up" transition:animate="fade">
+          Event technology decisions are <span style="color: var(--accent)">expensive to get wrong.</span>
+        </h1>
+        <p class="hero-body" style="animation-delay: 0.15s;">
+          Allenby Advisory helps event leaders choose, implement and get results from the right technology — without the learning curve, the wasted budget, or the failed launches.
+        </p>
+        <div class="hero-ctas" style="animation-delay: 0.3s;">
+          <Button label="Book a free 30-minute consultation" href="#contact" />
+          <Button label="See our work" href="/client-successes" variant="ghost" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WHO THIS IS FOR
+         ============================================================ -->
+    <section>
+      <div class="section-inner">
+        <SectionLabel text="Who this is for" />
+        <h2 class="section-h2">You know what you need. You need someone who's done it before.</h2>
+        <div class="audience-box reveal">
+          <p>You're an Event Director, Marketing Manager or Digital Leader responsible for the technology that makes your event work — for attendees, exhibitors and sponsors.</p>
+          <p>Maybe you're replacing a platform. Maybe you're launching new digital capabilities. Maybe you've invested in tech that isn't delivering results.</p>
+          <p><em>"This is exactly the kind of challenge Allenby Advisory was built for."</em></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WHAT WE DO
+         ============================================================ -->
+    <section>
+      <div class="section-inner">
+        <SectionLabel text="What we do" />
+        <h2 class="section-h2">Three Ways We Work.</h2>
+        <div class="grid-separator services-grid">
+          <ServiceTile
+            number="01"
+            category="Advisory"
+            title="Technology Sourcing and Selection"
+            body="Seen too many demos? We cut through the noise. Drawing on 10+ years of hands-on experience, we identify the right tools for your event and help you avoid costly mistakes."
+            href="/services#advisory"
+          />
+          <ServiceTile
+            number="02"
+            category="Delivery"
+            title="Project Delivery and Implementation"
+            body="From scoping to go-live. We manage the vendor relationship, oversee integration, and make sure your team is equipped to get the most from new platforms."
+            href="/services#delivery"
+          />
+          <ServiceTile
+            number="03"
+            category="Engagement"
+            title="Audience Engagement and Adoption"
+            body="Technology is only valuable if people use it. We build the communication and onboarding strategies that drive adoption and measurable outcomes."
+            href="/services#engagement"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         NETWORK STRIP (dark section)
+         ============================================================ -->
+    <div class="dark-section reveal">
+      <div class="network-inner">
+        <SectionLabel text="Why Allenby Advisory" />
+        <h2>One Point of Contact. A Whole Team Behind It.</h2>
+        <p>When you work with Allenby Advisory, you're not just engaging one consultant. Ade Allenby brings 10 years of specialist experience — and a close network of specialists assembled around your specific project.</p>
+        <div class="skill-pills">
+          <span class="skill-pill reveal">Digital strategy</span>
+          <span class="skill-pill reveal">Tech implementation</span>
+          <span class="skill-pill reveal">Event marketing</span>
+          <span class="skill-pill reveal">Data and insights</span>
+          <span class="skill-pill reveal">Onsite operations</span>
+          <span class="skill-pill reveal">Vendor management</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         RECENT WORK
+         ============================================================ -->
+    <section>
+      <div class="section-inner">
+        <SectionLabel text="Recent work" />
+        <h2 class="section-h2">Problems Solved. Results Measured.</h2>
+        <div class="two-col-grid">
+          <CaseCard
+            result="100% growth in app adoption"
+            title="Equiphotel Paris — Visitor Navigation Strategy"
+            eventTag="6 halls · 3 floors · Paris"
+            body="We turned negative visitor feedback on navigation into a measurable multi-year improvement programme — validated with onsite research."
+            href="/client-successes#equiphotel"
+          />
+          <CaseCard
+            result="Serious meetings. Party atmosphere. Both delivered."
+            title="Imbibe Live London — 1-2-1 Meetings Programme"
+            eventTag="On-trade drinks show · London"
+            body="We helped a show known for its convivial atmosphere run structured, productive business meetings — and built the tools to prove they happened."
+            href="/client-successes#imbibe"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WHAT CLIENTS SAY
+         ============================================================ -->
+    <section>
+      <div class="section-inner">
+        <SectionLabel text="What clients say" />
+        <div class="two-col-grid">
+          <Testimonial
+            quote="Ade's deep and practical knowledge of event tech means he has an instinct for the right solutions. First and foremost, he's motivated by helping organiser and user teams get optimum value from a project."
+            name="Mark Maydon"
+            role="Director, Crowd Connected"
+          />
+          <Testimonial
+            quote="Grip was the ideal solution for our young, mobile audience. We needed something that would work easily through their phones — and Ade made sure it did."
+            name="Sonja Van Praag"
+            role="Publishing & Events Director, Imbibe"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         INSIGHTS
+         ============================================================ -->
+    <section>
+      <div class="section-inner">
+        <SectionLabel text="Insights" />
+        <h2 class="section-h2">Practical Thinking from the Field.</h2>
+        <div class="grid-separator insights-grid">
+          <InsightItem
+            type="Article"
+            title="Developing a 1-2-1 Meetings Strategy: Key Insights for Success"
+            body="The factors that actually determine whether a meetings programme delivers value."
+            href="https://collingwood.group/resources/developing-a-1-2-1-meetings-strategy-key-insights-for-success/"
+          />
+          <InsightItem
+            type="Podcast"
+            title="Scaling with Event Tech — Event Industry News"
+            body="How technology can help events scale — what works, what doesn't."
+            href="https://www.eventindustrynews.com/podcasts/scaling-with-event-tech"
+          />
+          <InsightItem
+            type="Article"
+            title="Event Navigation and Wayfinding: Myth Busting"
+            body="What the evidence says about how visitors actually navigate large events."
+            href="/insights#navigation"
+          />
+        </div>
+        <div class="insights-footer">
+          <a href="/insights" class="see-all-link">See all insights</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER CTA (dark section)
+         ============================================================ -->
+    <div class="dark-section" id="contact">
+      <div class="network-inner">
+        <h2>Not Sure Whether You Need Help Right Now?</h2>
+        <p>Tell us about your current challenge or opportunity. Our free 30-minute consultation is no-obligation and focused entirely on your event.</p>
+        <div style="margin-top: 32px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px;">
+          <Button label="Book your free consultation" href="/#contact" variant="light" />
+          <p class="contact-email">
+            Or email Ade directly: <a href="mailto:ade@allenby-advisory.com" class="email-link">ade@allenby-advisory.com</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  /* ---- Hero ---- */
+  .hero-section {
+    padding: var(--space-2xl) var(--space-lg);
+    background: var(--offwhite);
+  }
+
+  .hero-h1 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 1.06;
+    letter-spacing: 0.01em;
+    color: var(--charcoal);
+    max-width: 780px;
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-body {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--body);
+    max-width: 560px;
+    margin-bottom: var(--space-lg);
+    animation: slideUp 0.5s ease forwards;
+    animation-fill-mode: both;
+    opacity: 0;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    animation: slideUp 0.5s ease forwards;
+    animation-fill-mode: both;
+    opacity: 0;
+  }
+
+  /* ---- Section headings ---- */
+  .section-h2 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    color: var(--charcoal);
+    max-width: 640px;
+    margin-bottom: var(--space-lg);
+  }
+
+  /* ---- Audience box ---- */
+  .audience-box {
+    background: var(--white);
+    border-left: 3px solid var(--accent);
+    padding: 28px 32px;
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .audience-box em {
+    color: var(--charcoal);
+    font-style: italic;
+  }
+
+  /* ---- Services grid ---- */
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .services-grid > * {
+    transition-delay: var(--stagger-delay, 0s);
+  }
+
+  /* ---- Network strip ---- */
+  .network-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+  }
+
+  .dark-section {
+    padding: var(--space-2xl) 0;
+  }
+
+  .skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: var(--space-lg);
+  }
+
+  /* ---- Two column grid ---- */
+  .two-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .two-col-grid > * {
+    /* Reveal applied to children */
+  }
+
+  /* ---- Insights grid ---- */
+  .insights-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .insights-grid > * {
+    transition-delay: var(--stagger-delay, 0s);
+  }
+
+  .insights-footer {
+    margin-top: var(--space-lg);
+  }
+
+  .see-all-link {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .see-all-link:hover {
+    text-decoration: underline;
+  }
+
+  /* ---- Contact email ---- */
+  .contact-email {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #666;
+    max-width: none;
+  }
+
+  .email-link {
+    color: #6b9fc5;
+    text-decoration: none;
+  }
+
+  .email-link:hover {
+    text-decoration: underline;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 768px) {
+    .hero-h1 {
+      font-size: 34px;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .two-col-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .insights-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-ctas {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

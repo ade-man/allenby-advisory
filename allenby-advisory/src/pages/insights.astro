@@ -1,0 +1,388 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import InsightItem from '../components/InsightItem.astro';
+---
+
+<Base
+  title="Insights"
+  description="Practical thinking on event technology, digital strategy and audience engagement from Allenby Advisory."
+>
+  <Nav />
+
+  <main>
+
+    <!-- ============================================================
+         PAGE HEADER
+         ============================================================ -->
+    <section class="page-header">
+      <div class="section-inner">
+        <SectionLabel text="Ideas and thinking" />
+        <h1 class="page-h1">Insights</h1>
+        <p class="page-intro">Practical thinking on event technology, digital strategy and audience engagement — drawn from projects, research and conversations across the industry.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FEATURED ARTICLE
+         ============================================================ -->
+    <section class="featured-section reveal">
+      <div class="featured-inner">
+        <div class="featured-left">
+          <p class="featured-eyebrow">Featured</p>
+          <span class="featured-tag">Article</span>
+          <p class="featured-publisher">Collingwood Group</p>
+          <h2 class="featured-h2">Developing a 1-2-1 Meetings Strategy: Key Insights for Success</h2>
+          <p class="featured-body">The factors that actually determine whether a meetings programme delivers value — from matchmaking logic to onsite facilitation. A practical guide for event teams thinking seriously about how to structure their programme.</p>
+          <a
+            href="https://collingwood.group/resources/developing-a-1-2-1-meetings-strategy-key-insights-for-success/"
+            class="featured-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read the article
+          </a>
+        </div>
+        <div class="featured-right">
+          <div class="pullquote">
+            <blockquote class="pullquote-text">
+              "The difference between a meetings programme that works and one that doesn't is almost never the technology."
+            </blockquote>
+            <cite class="pullquote-cite">Ade Allenby — Allenby Advisory</cite>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ARTICLES GRID
+         ============================================================ -->
+    <section>
+      <div class="section-inner">
+        <h2 class="section-h2">Articles</h2>
+        <div class="grid-separator articles-grid">
+          <InsightItem
+            type="Article"
+            title="Event Navigation and Wayfinding: Myth Busting"
+            body="A challenge to what event teams assume about how visitors navigate — and what the evidence actually says."
+            publisher="allenby-advisory.com"
+            href="/insights/navigation"
+          />
+          <InsightItem
+            type="Article"
+            title="Using Data to Improve Your Event"
+            body="Where to start if you want to move from gut feel to data-informed decisions. Practical, not theoretical."
+            publisher="allenby-advisory.com"
+            href="/insights/data"
+          />
+          <InsightItem
+            type="Article"
+            title="Astrology, My Mother-in-Law and the Future of Events"
+            body="How COVID permanently shifted attendee expectations for face-to-face events."
+            publisher="LinkedIn"
+            href="https://www.linkedin.com/pulse/astrology-my-mother-in-law-future-events-ade-allenby/"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SPEAKING, PODCASTS AND PANELS
+         ============================================================ -->
+    <section>
+      <div class="section-inner">
+        <h2 class="section-h2">Speaking, Podcasts and Panels</h2>
+        <ul class="appearances-list">
+
+          <li class="appearance-item reveal">
+            <span class="appearance-badge">Podcast</span>
+            <div class="appearance-content">
+              <p class="appearance-title">Scaling with event tech — Event Industry News</p>
+              <p class="appearance-desc">How technology can help events scale. What works, what doesn't, and where organisers typically go wrong.</p>
+            </div>
+            <a
+              href="https://www.eventindustrynews.com/podcasts/scaling-with-event-tech"
+              class="appearance-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Listen
+            </a>
+          </li>
+
+          <li class="appearance-item reveal">
+            <span class="appearance-badge">Panel</span>
+            <div class="appearance-content">
+              <p class="appearance-title">Community marketing panel — Exhibition News</p>
+              <p class="appearance-desc">Hosting a panel at EN Marketing Conference 2024 on social selling and community building.</p>
+            </div>
+            <a
+              href="https://www.linkedin.com/pulse/panel-discussion-social-selling-future-innovations-ogxye/"
+              class="appearance-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read
+            </a>
+          </li>
+
+          <li class="appearance-item reveal">
+            <span class="appearance-badge">Webinar</span>
+            <div class="appearance-content">
+              <p class="appearance-title">Small details matter — Ctrl + Alt + Event</p>
+              <p class="appearance-desc">Fine-tuning your events: tech integration and behavioural insights for event success.</p>
+            </div>
+            <a
+              href="https://www.linkedin.com/events/smalldetailsmatter-fine-tuningy7168621170567692289/comments/"
+              class="appearance-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Watch
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER CTA
+         ============================================================ -->
+    <div class="dark-section">
+      <div class="cta-inner">
+        <h2>Want to Talk Through Something You've Read?</h2>
+        <p>Most good conversations start with a question. If something here has sparked a thought about your own event, we'd be happy to explore it together.</p>
+        <div style="margin-top: 32px;">
+          <Button label="Book a free 30-minute call" href="/#contact" variant="light" />
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  /* ---- Page header ---- */
+  .page-header { background: var(--offwhite); }
+
+  .page-h1 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 1.06;
+    letter-spacing: 0.01em;
+    color: var(--charcoal);
+    margin-bottom: var(--space-md);
+  }
+
+  .page-intro {
+    max-width: 560px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--body);
+  }
+
+  /* ---- Featured article ---- */
+  .featured-section {
+    background: var(--white);
+    border-bottom: 0.5px solid var(--lightgrey);
+  }
+
+  .featured-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: var(--space-2xl) var(--space-lg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .featured-eyebrow {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+    margin-bottom: 12px;
+  }
+
+  .featured-tag {
+    display: inline-block;
+    border: 0.5px solid var(--lightgrey);
+    font-family: 'Archivo', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    color: var(--body);
+    margin-bottom: 12px;
+  }
+
+  .featured-publisher {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+    margin-bottom: 16px;
+  }
+
+  .featured-h2 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    color: var(--charcoal);
+    margin-bottom: 14px;
+    max-width: 480px;
+  }
+
+  .featured-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--body);
+    max-width: 460px;
+    margin-bottom: 20px;
+  }
+
+  .featured-link {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .featured-link:hover { text-decoration: underline; }
+
+  /* Pullquote */
+  .pullquote {
+    border-left: 3px solid var(--accent);
+    padding-left: 20px;
+    padding-top: 8px;
+  }
+
+  .pullquote-text {
+    font-family: 'Archivo', sans-serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--charcoal);
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+
+  .pullquote-cite {
+    display: block;
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+    font-style: normal;
+  }
+
+  /* ---- Articles grid ---- */
+  .section-h2 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    color: var(--charcoal);
+    margin-bottom: var(--space-md);
+  }
+
+  .articles-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* ---- Appearances list ---- */
+  .appearances-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .appearance-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 0.5px solid var(--lightgrey);
+  }
+
+  .appearance-badge {
+    background: var(--charcoal);
+    color: var(--white);
+    font-family: 'Archivo', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    display: inline-block;
+    align-self: flex-start;
+  }
+
+  .appearance-title {
+    font-size: 13px;
+    color: var(--charcoal);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .appearance-desc {
+    font-size: 13px;
+    color: var(--body);
+    line-height: 1.5;
+  }
+
+  .appearance-link {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .appearance-link:hover { text-decoration: underline; }
+
+  /* ---- Footer CTA ---- */
+  .dark-section { padding: var(--space-2xl) 0; }
+
+  .cta-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 768px) {
+    .page-h1 { font-size: 34px; }
+
+    .featured-inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+
+    .articles-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .appearance-item {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  }
+</style>

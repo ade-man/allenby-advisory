@@ -1,0 +1,40 @@
+---
+---
+
+<footer>
+  <span class="footer-brand font-brand">Allenby Advisory</span>
+  <p>Event technology and digital &middot; &copy; 2025</p>
+</footer>
+
+<style>
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px var(--space-lg);
+    border-top: 0.5px solid var(--lightgrey);
+    background: var(--offwhite);
+  }
+
+  .footer-brand {
+    font-size: 13px;
+    color: var(--charcoal);
+  }
+
+  footer p {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+  }
+
+  @media (max-width: 768px) {
+    footer {
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+      padding: 22px var(--space-sm);
+    }
+  }
+</style>

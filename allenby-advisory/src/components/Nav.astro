@@ -1,0 +1,207 @@
+---
+const pathname = Astro.url.pathname;
+
+const links = [
+  { href: '/services', label: 'Services' },
+  { href: '/client-successes', label: 'Client Successes' },
+  { href: '/about', label: 'About' },
+  { href: '/insights', label: 'Insights' },
+];
+---
+
+<nav>
+  <a href="/" class="nav-logo font-brand">Allenby Advisory</a>
+  <ul class="nav-links">
+    {links.map((link) => (
+      <li>
+        <a
+          href={link.href}
+          class={pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href)) ? 'nav-active' : ''}
+        >
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+  <a href="/#contact" class="nav-cta">Book a consultation</a>
+
+  <!-- Mobile hamburger -->
+  <button class="nav-hamburger" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="nav-drawer" id="nav-drawer" aria-hidden="true">
+  <ul>
+    {links.map((link) => (
+      <li><a href={link.href}>{link.label}</a></li>
+    ))}
+    <li><a href="/#contact">Book a consultation</a></li>
+  </ul>
+</div>
+
+<style>
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 0 var(--space-lg);
+    height: 60px;
+    border-bottom: 0.5px solid var(--lightgrey);
+    background: var(--offwhite);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-size: 15px;
+    color: var(--charcoal);
+    text-decoration: none;
+    margin-right: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+    text-decoration: none;
+    padding-bottom: 2px;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.nav-active {
+    color: var(--charcoal);
+    border-bottom: 0.5px solid var(--charcoal);
+  }
+
+  .nav-cta {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    background: var(--charcoal);
+    color: var(--white);
+    padding: 10px 20px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .nav-cta:hover {
+    background: #333;
+  }
+
+  /* Hamburger — hidden on desktop */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: var(--charcoal);
+  }
+
+  /* Mobile drawer */
+  .nav-drawer {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: var(--charcoal);
+    z-index: 99;
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .nav-drawer.is-open {
+    display: block;
+  }
+
+  .nav-drawer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-drawer a {
+    display: block;
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    padding: 14px 0;
+    border-bottom: 0.5px solid #333;
+  }
+
+  .nav-drawer a:last-child {
+    border-bottom: none;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links,
+    .nav-cta {
+      display: none;
+    }
+
+    .nav-hamburger {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  function setupHamburger() {
+    const toggle = document.getElementById('nav-toggle');
+    const drawer = document.getElementById('nav-drawer');
+
+    if (toggle && drawer) {
+      // Toggle drawer open/closed
+      toggle.addEventListener('click', () => {
+        const isOpen = drawer.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        drawer.setAttribute('aria-hidden', String(!isOpen));
+      });
+
+      // Close drawer when any link inside it is clicked
+      drawer.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          drawer.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          drawer.setAttribute('aria-hidden', 'true');
+        });
+      });
+    }
+  }
+
+  // Run immediately on initial page load
+  setupHamburger();
+
+  // Re-run after each View Transition navigation
+  document.addEventListener('astro:after-swap', setupHamburger);
+</script>

@@ -1,0 +1,82 @@
+---
+interface Props {
+  result: string;
+  title: string;
+  eventTag: string;
+  body: string;
+  href: string;
+}
+
+const { result, title, eventTag, body, href } = Astro.props;
+---
+
+<div class="case-card reveal">
+  <p class="result-badge">{result}</p>
+  <h3>{title}</h3>
+  <p class="event-tag">{eventTag}</p>
+  <p class="card-body">{body}</p>
+  <a href={href}>Read the case study</a>
+</div>
+
+<style>
+  .case-card {
+    background: var(--white);
+    border: 0.5px solid var(--lightgrey);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .result-badge {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 0.5px solid var(--accent);
+    padding: 4px 10px;
+    display: inline-block;
+    align-self: flex-start;
+  }
+
+  h3 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--charcoal);
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+  }
+
+  .event-tag {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+  }
+
+  .card-body {
+    font-family: 'Archivo', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--body);
+    flex: 1;
+  }
+
+  a {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    align-self: flex-start;
+    margin-top: auto;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
