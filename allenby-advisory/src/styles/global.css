@@ -239,3 +239,167 @@ section {
     padding: 48px 20px;
   }
 }
+
+/* ------------------------------------------------------------
+   13. ARTICLE LAYOUT — used by /insights/* pages
+   ------------------------------------------------------------ */
+
+/* Centered reading column */
+.article-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* Body prose */
+.article-body p {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--body);
+  margin-bottom: 18px;
+}
+
+.article-body h2 {
+  font-family: 'Archivo Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  color: var(--charcoal);
+  letter-spacing: 0.01em;
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+
+.article-body ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.article-body ul li {
+  padding: 8px 0 8px 16px;
+  border-bottom: 0.5px solid var(--lightgrey);
+  position: relative;
+  font-family: 'Archivo', sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--body);
+}
+
+.article-body ul li:last-child {
+  border-bottom: none;
+}
+
+.article-body ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 17px;
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+}
+
+/* Pullquote */
+.article-pullquote {
+  margin: 40px 0;
+  padding-left: 24px;
+  border-left: 3px solid var(--accent);
+}
+
+.article-pullquote blockquote {
+  font-family: 'Archivo', sans-serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--charcoal);
+  line-height: 1.45;
+}
+
+.article-pullquote cite {
+  display: block;
+  font-family: 'Archivo', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--midgrey);
+  font-style: normal;
+  margin-top: 12px;
+}
+
+/* Standfirst */
+.article-standfirst {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 400;
+  font-size: 19px;
+  color: var(--charcoal);
+  line-height: 1.55;
+  margin-bottom: 28px;
+  max-width: 680px;
+}
+
+/* Meta strip */
+.article-meta {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  padding-top: 20px;
+  border-top: 0.5px solid var(--lightgrey);
+  max-width: 680px;
+}
+
+.article-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.article-meta-label {
+  font-family: 'Archivo', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--midgrey);
+}
+
+.article-meta-value {
+  font-family: 'Archivo', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  font-weight: 700;
+}
+
+.article-meta-value a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.article-meta-value a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .article-body p {
+    font-size: 15px;
+  }
+
+  .article-body h2 {
+    font-size: 22px;
+    margin-top: 36px;
+  }
+
+  .article-body ul li {
+    font-size: 15px;
+  }
+
+  .article-pullquote blockquote {
+    font-size: 17px;
+  }
+
+  .article-meta {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
