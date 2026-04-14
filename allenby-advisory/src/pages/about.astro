@@ -22,9 +22,14 @@ import { BOOKING_URL } from '../config';
       <div class="hero-left">
         <SectionLabel text="About Allenby Advisory" />
         <h1 class="hero-h1">Why I Started Allenby Advisory</h1>
-        <p>I spent over 10 years working inside the event technology and digital space — with organisers, vendors and delivery teams across the UK and Europe's major trade shows and exhibitions.</p>
-        <p>What I kept seeing was the same pattern: event teams with real ambition for their digital experience, but without the specialist knowledge to navigate the technology landscape confidently.</p>
-        <p>Allenby Advisory exists to give event organising teams access to that expertise precisely when they need it — without the cost and commitment of a full-time hire.</p>
+        <div class="hero-body">
+          <div class="hero-text">
+            <p>I spent over 10 years working inside the event technology and digital space — with organisers, vendors and delivery teams across the UK and Europe's major trade shows and exhibitions.</p>
+            <p>What I kept seeing was the same pattern: event teams with real ambition for their digital experience, but without the specialist knowledge to navigate the technology landscape confidently.</p>
+            <p>Allenby Advisory exists to give event organising teams access to that expertise precisely when they need it — without the cost and commitment of a full-time hire.</p>
+          </div>
+          <img src="/Ade-Allenby-Speaker.jpeg" alt="Ade Allenby speaking at EN Marketing Conference 2024" class="speaker-photo" />
+        </div>
       </div>
       <div class="hero-right">
         <div class="credential-card reveal">
@@ -179,6 +184,28 @@ import { BOOKING_URL } from '../config';
     display: flex;
     align-items: flex-start;
     justify-content: center;
+  }
+
+  .hero-body {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: var(--space-lg);
+    align-items: stretch;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-right: var(--space-lg);
+  }
+
+  .speaker-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
   }
 
   /* Credential card */
@@ -394,6 +421,8 @@ import { BOOKING_URL } from '../config';
     .hero-left { border-right: none; }
     .hero-h1 { font-size: 34px; }
     .hero-right { justify-content: flex-start; }
+    .hero-body { grid-template-columns: 1fr; }
+    .speaker-photo { aspect-ratio: 16 / 9; }
 
     .flexible-split {
       grid-template-columns: 1fr;
