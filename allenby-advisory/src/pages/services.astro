@@ -4,6 +4,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import Button from '../components/Button.astro';
 import SectionLabel from '../components/SectionLabel.astro';
+import { BOOKING_URL } from '../config';
 ---
 
 <Base
@@ -46,7 +47,7 @@ import SectionLabel from '../components/SectionLabel.astro';
         <div class="how-it-works">
           <span class="how-label">How it works:</span> Flexible engagement from a few hours a month. No long-term commitment required.
         </div>
-        <Button label="Let's talk" href="https://calendar.app.google/kscewyXr9JDFXDYK8" external={true} />
+        <Button label="Let's talk" href={BOOKING_URL} external={true} />
       </div>
     </div>
 
@@ -71,7 +72,7 @@ import SectionLabel from '../components/SectionLabel.astro';
         <div class="how-it-works">
           <span class="how-label">How it works:</span> Project-based engagement scoped to your timeline and budget.
         </div>
-        <Button label="Tell us about your project" href="https://calendar.app.google/kscewyXr9JDFXDYK8" external={true} />
+        <Button label="Tell us about your project" href={BOOKING_URL} external={true} />
       </div>
     </div>
 
@@ -96,7 +97,7 @@ import SectionLabel from '../components/SectionLabel.astro';
         <div class="how-it-works">
           <span class="how-label">How it works:</span> Structured programme, typically 4–12 weeks around your event cycle.
         </div>
-        <Button label="Let's explore this" href="https://calendar.app.google/kscewyXr9JDFXDYK8" external={true} />
+        <Button label="Let's explore this" href={BOOKING_URL} external={true} />
       </div>
     </div>
 
@@ -152,7 +153,7 @@ import SectionLabel from '../components/SectionLabel.astro';
         <h2>Not Sure Which Applies to You?</h2>
         <p>Most conversations start with a problem, not a service category. Book a free 30-minute call and we'll work it out together.</p>
         <div style="margin-top: 32px;">
-          <Button label="Book a free consultation" href="https://calendar.app.google/kscewyXr9JDFXDYK8" variant="light" external={true} />
+          <Button label="Book a free consultation" href={BOOKING_URL} variant="light" external={true} />
         </div>
       </div>
     </div>
