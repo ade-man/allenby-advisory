@@ -403,3 +403,70 @@ section {
     gap: 16px;
   }
 }
+
+/* ------------------------------------------------------------
+   14. HOMEPAGE HERO — background image
+   ------------------------------------------------------------ */
+
+.hero-image {
+  position: relative;
+  overflow: hidden;
+  animation: hero-image-fade-in 0.8s ease-out 0.15s both;
+}
+
+.hero-image-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Layer 1 — charcoal multiply to deepen shadows into brand charcoal */
+/* Tuning: lower opacity (e.g. 0.40) for more photo detail; raise (e.g. 0.70) for darker/moodier feel */
+.hero-image-overlay-multiply {
+  position: absolute;
+  inset: 0;
+  background: var(--charcoal);
+  mix-blend-mode: multiply;
+  opacity: 0.30;
+  pointer-events: none;
+}
+
+/* Layer 2 — subtle accent colour shift */
+/* Tuning: raise opacity (e.g. 0.25) for a more visible blue tonal shift */
+.hero-image-overlay-accent {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  mix-blend-mode: color;
+  opacity: 0.10;
+  pointer-events: none;
+}
+
+/* Layer 3 — horizontal fade into offwhite at the text column side */
+/* Tuning: shift 55% left (e.g. 45%) for harder fade, right (e.g. 65%) for softer fade */
+/* Note: rgba values match --offwhite (#F5F4F2). Update if --offwhite changes. */
+.hero-image-overlay-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    var(--offwhite) 0%,
+    rgba(245, 244, 242, 0.85) 18%,
+    rgba(245, 244, 242, 0) 55%
+  );
+  pointer-events: none;
+}
+
+@keyframes hero-image-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-image {
+    animation: none;
+  }
+}
