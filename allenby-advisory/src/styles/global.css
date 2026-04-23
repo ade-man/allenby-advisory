@@ -470,3 +470,119 @@ section {
     animation: none;
   }
 }
+
+/* ------------------------------------------------------------
+   15. OBJECTIVES SECTION — used on Client Successes page
+   ------------------------------------------------------------ */
+
+.objectives-section {
+  background: var(--white);
+  padding: var(--space-2xl) var(--space-lg);
+  border-bottom: 0.5px solid var(--lightgrey);
+}
+
+.objectives-h2 {
+  font-family: 'Archivo Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 34px;
+  color: var(--charcoal);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  margin-bottom: 16px;
+}
+
+.objectives-intro {
+  font-family: 'Archivo', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--body);
+  max-width: 640px;
+  margin-bottom: 56px;
+}
+
+.objective-row {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 48px;
+  padding: 32px 0;
+  border-bottom: 0.5px solid var(--lightgrey);
+}
+
+.objective-row:last-child {
+  border-bottom: none;
+}
+
+.objective-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.objective-eyebrow {
+  font-family: 'Archivo', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--midgrey);
+}
+
+.objective-row h3 {
+  font-family: 'Archivo Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--charcoal);
+  line-height: 1.2;
+  margin-top: 10px;
+}
+
+.objective-refs {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.objective-ref {
+  display: block;
+}
+
+.objective-ref-client {
+  display: block;
+  font-family: 'Archivo', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--charcoal);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.objective-ref-client:hover {
+  color: var(--accent);
+}
+
+.objective-ref-hook {
+  display: block;
+  font-family: 'Archivo', sans-serif;
+  font-size: 14px;
+  color: var(--body);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+.objective-ref-badge {
+  display: inline-block;
+  font-family: 'Archivo', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 0.5px solid var(--accent);
+  padding: 3px 8px;
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .objective-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 28px 0;
+  }
+}
