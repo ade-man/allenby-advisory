@@ -192,6 +192,45 @@ Track progress on each task. Mark items `[x]` as they are completed.
 
 ---
 
+## Task 6d — Global Banking Markets Case Study ✅
+
+- [x] Add fifth CaseCard to `client-successes.astro` project index
+- [x] Update case index grid to `grid-template-columns: repeat(3, 1fr)` (3-over-2 layout)
+- [x] Create `src/pages/client-successes/global-banking-markets.astro`
+- [x] Build Breadcrumb (← Client successes)
+- [x] Build page header (eyebrow, H1, body)
+- [x] Build top section (2-column: text + meta card with MetricBox — 4 meta items incl. Delivery partner: The Growth Architect; MetricBox: 500+ / Automated workflows in production)
+- [x] Build body columns (3-column separator grid: challenge / what we did / results)
+- [x] Build narrative section (--offwhite bg, H3 + 8 body paragraphs, max-width 720px)
+- [x] No quote section (intentional — no attributed quote in source material)
+- [x] Build outcomes section (--white bg, H3 + 3 dark metric cells: 1 / 500+ / Live on --charcoal bg)
+- [x] Build role strip (explicitly credits Adam Price and The Growth Architect)
+- [x] Build Footer CTA (dark section)
+- [x] Add reveal animations to all sections
+
+---
+
+## Task 6e — Clarion AI Assistant Case Study ✅
+
+- [x] Add sixth CaseCard to `client-successes.astro` project index (grid already 3-column — no grid change required)
+- [x] Card body uses voice-neutral phrasing: "An AI matchmaking and concierge assistant was developed across seven iterations…"
+- [x] Create `src/pages/client-successes/clarion-ai-assistant.astro`
+- [x] Build Breadcrumb (← Client successes)
+- [x] Build page header (eyebrow, H1, body)
+- [x] Build top section (2-column: text + meta card — 4 meta items: Client / Scope / Service type / Delivery partner: Visual Hive; MetricBox: 2025 / TSNN Best Innovation on a B2C show)
+- [x] Build body columns — column 2 header reads "What Ade did" (third-person variant)
+- [x] Build narrative section: H3 "The full story" + Paras 1–3 (verbatim signed copy) + 7-row iterations table + Paras 4–6 (verbatim signed copy)
+- [x] Iterations table: --offwhite header row (ALL CAPS 10px tracked --midgrey), --white body rows, 0.5px --lightgrey row separators, 56px / 220px / 1fr columns; scrolls horizontally on mobile
+- [x] Build quote section (full TSNN award citation — US spelling preserved, max-width 620px)
+- [x] Build outcomes section (3 dark metric cells: 7 / 57%+ / 77% on --charcoal bg)
+- [x] Build role strip (explicitly credits "selection and recommendation of Visual Hive" and "Bogdan Maran's team at Visual Hive reporting into Ade on delivery")
+- [x] Footer CTA body reads "Ade would welcome the conversation" (third-person)
+- [x] Build Footer CTA (dark section)
+- [x] Add reveal animations to all sections
+- [x] Verify: `npm run build` completed — 9 pages built, no errors
+
+---
+
 ## Future Tasks (Not in Scope)
 
 - [ ] Task 13: Individual article pages under /insights/[slug]

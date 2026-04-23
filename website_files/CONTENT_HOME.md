@@ -111,14 +111,14 @@ Animation: H2 fades in, skill pills stagger in on scroll.
 - Result badge: 100% growth in app adoption
 - Title: Equiphotel Paris — Visitor navigation strategy
 - Event tag: 6 halls · 3 floors · Paris
-- Body: We turned negative visitor feedback on navigation into a measurable multi-year improvement programme — validated with onsite research.
+- Body: Persistent negative visitor feedback on navigation was turned into a measurable multi-year improvement programme — validated with onsite research.
 - Link: Read the full story → href: "/client-successes#equiphotel"
 
 ### Card 2
 - Result badge: Serious meetings. Party atmosphere. Both delivered.
 - Title: Imbibe Live London — 1-2-1 Meetings Programme
 - Event tag: On-trade drinks show · London
-- Body: We helped a show known for its convivial atmosphere run structured, productive business meetings — and built the tools to prove they happened.
+- Body: A show known for its convivial atmosphere ran structured, productive business meetings — with the tools in place to prove they happened.
 - Link: Read the full story → href: "/client-successes#imbibe"
 
 Animation: cards reveal on scroll.

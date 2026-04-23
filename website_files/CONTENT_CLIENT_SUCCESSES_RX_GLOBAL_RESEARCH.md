@@ -17,7 +17,7 @@ Add a CaseCard for RX Global Customer Research to the project index grid. Update
 - Result badge: 88% awareness amongst senior event managers
 - Title: RX Global — Attendee behavioural archetypes
 - Event tag: Global · 68 events · 10 countries
-- Body: We led a global research programme that produced an award-winning framework for understanding attendee needs — adopted across every business unit worldwide.
+- Body: A global research programme produced an award-winning framework for understanding attendee needs — adopted across every business unit worldwide.
 - Link: Read the full story → href: "/client-successes/rx-global-research"
 
 ---
@@ -53,7 +53,7 @@ Background: --white
 Left column:
 - **Label (ALL CAPS, --midgrey, 11px tracked):** The project in brief
 - **H2:** From fragmented insight to a common global language
-- **Body:** RX needed a shared framework for understanding B2B event attendees across its global portfolio. We led a multi-country research programme — qualitative interviews followed by a global quantitative survey — that produced a set of behavioural archetypes now used in every business unit worldwide.
+- **Body:** RX needed a shared framework for understanding B2B event attendees across its global portfolio. Ade led a multi-country research programme — qualitative interviews followed by a global quantitative survey — that produced a set of behavioural archetypes now used in every business unit worldwide.
 - **Button (primary):** Get in touch about a similar project → href: "/#contact"
 
 Right column (meta card — --offwhite bg, 0.5px border):
@@ -76,7 +76,7 @@ Column headers: ALL CAPS, 11px, tracked, --midgrey
 **Column 1 — The challenge:**
 RX was rebuilding its core event platform and needed to establish what B2B event attendees had in common globally — across markets as different as the US, UK, France, UAE and China. Without a shared understanding of attendee needs, the digital toolset risked being built around assumptions rather than evidence.
 
-**Column 2 — What we did:**
+**Column 2 — What Ade did:**
 Recruited and managed the research agency, coordinated ten country business units, developed the methodology with RX insight teams, and oversaw qualitative interviews filmed across multiple markets. The findings were validated with a quantitative survey across 68 events globally.
 
 **Column 3 — The results:**
@@ -99,7 +99,7 @@ Para 1:
 As part of a global initiative to rebuild the core event platform, the brief was to find out what B2B event attendees had in common — regardless of geography, sector or event format. The goal was a framework that could underpin a standardised yet modular digital toolset, applicable across the entire RX portfolio.
 
 Para 2:
-The first task was to recruit the right research partner. We selected The Sound HQ and worked closely with them and RX insight teams to develop a methodology that would work across culturally diverse markets. Ten country business units took part — including the US, UK, France, UAE and China — each requiring coordination, briefing and local adaptation.
+The first task was to recruit the right research partner. Ade selected The Sound HQ and worked closely with them and RX insight teams to develop a methodology that would work across culturally diverse markets. Ten country business units took part — including the US, UK, France, UAE and China — each requiring coordination, briefing and local adaptation.
 
 Para 3:
 The qualitative phase involved filmed interviews with attendees across multiple markets — designed not just to capture data, but to produce compelling material that could communicate the findings internally. Interview briefs were developed collaboratively and reviewed at each stage to ensure consistency and depth.
@@ -111,7 +111,7 @@ Para 5:
 A key output recognised by the judges was a set of behavioural archetypes. These went beyond digital tool preferences to describe the different ways attendees get value from a live event — from structured meeting-seekers to serendipitous explorers. The archetypes provided a language that event teams could use to think about their audience in a more nuanced, evidence-based way.
 
 Para 6:
-To embed the framework across the organisation, we delivered a programme of 19 workshops around the world. These weren't passive presentations — they were working sessions designed to help event teams apply the archetypes to their own events, audiences and commercial models. When senior event managers were surveyed the following year, 88% were aware of the framework and its applications.
+To embed the framework across the organisation, Ade delivered a programme of 19 workshops around the world. These weren't passive presentations — they were working sessions designed to help event teams apply the archetypes to their own events, audiences and commercial models. When senior event managers were surveyed the following year, 88% were aware of the framework and its applications.
 
 Para 7:
 The archetypes were subsequently integrated into RX's registration and post-event survey processes, allowing event teams to assess which attendee goals mattered most at each show — and to match those goals against the tools and experiences on offer. This became a key driver in improving Net Promoter Scores across the portfolio.
@@ -172,7 +172,7 @@ Background: --charcoal
 
 **H2:** Working on something similar?
 
-**Body:** Whether you're looking to understand your audience better, build an evidence base for digital investment, or align a global team around a shared framework — we'd welcome the conversation.
+**Body:** Whether you're looking to understand your audience better, build an evidence base for digital investment, or align a global team around a shared framework — Ade would welcome the conversation.
 
 **Button (light):** Book a free 30-minute call → href: "/#contact"
 
