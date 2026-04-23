@@ -1,0 +1,5 @@
+# Claude Code worktrees and local AI tooling
+.claude/
+
+# macOS
+.DS_Store
