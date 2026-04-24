@@ -108,18 +108,18 @@ Animation: H2 fades in, skill pills stagger in on scroll.
 **Layout:** 2-column grid using CaseCard component.
 
 ### Card 1
-- Result badge: 100% growth in app adoption
-- Title: Equiphotel Paris — Visitor navigation strategy
-- Event tag: 6 halls · 3 floors · Paris
-- Body: Persistent negative visitor feedback on navigation was turned into a measurable multi-year improvement programme — validated with onsite research.
-- Link: Read the full story → href: "/client-successes#equiphotel"
+- Result badge: Pain points mapped. AI journey built.
+- Title: Clarion — AI-enhanced attendee journey
+- Event tag: Global events · Product development · AI matchmaking
+- Body: We grounded an ambitious AI programme in real evidence of customer needs — turning research into a designed journey that enhances how attendees discover, plan and act.
+- Link: Read the full story → href: "/client-successes/clarion-ai-assistant"
 
 ### Card 2
-- Result badge: Serious meetings. Party atmosphere. Both delivered.
-- Title: Imbibe Live London — 1-2-1 Meetings Programme
-- Event tag: On-trade drinks show · London
-- Body: A show known for its convivial atmosphere ran structured, productive business meetings — with the tools in place to prove they happened.
-- Link: Read the full story → href: "/client-successes#imbibe"
+- Result badge: One connected platform. 500+ automated workflows.
+- Title: GBM — Event tech stack rebuild
+- Event tag: Multi-country · Finance conferences · Systems and data
+- Body: We replaced a legacy CRM and fragmented spreadsheets with HubSpot as the operational backbone — a client portal, live website, and automated revenue reporting across the global portfolio.
+- Link: Read the full story → href: "/client-successes/global-banking-markets"
 
 Animation: cards reveal on scroll.
 
