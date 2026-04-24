@@ -477,7 +477,6 @@ section {
 
 .objectives-section {
   background: var(--white);
-  padding: var(--space-2xl) var(--space-lg);
   border-bottom: 0.5px solid var(--lightgrey);
 }
 
