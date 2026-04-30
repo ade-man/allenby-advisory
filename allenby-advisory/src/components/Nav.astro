@@ -24,7 +24,7 @@ const links = [
       </li>
     ))}
   </ul>
-  <a href={BOOKING_URL} class="nav-cta" target="_blank" rel="noopener noreferrer">Book a consultation</a>
+  <a href="/book" class="nav-cta">Book a consultation</a>
 
   <!-- Mobile hamburger -->
   <button class="nav-hamburger" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
@@ -40,7 +40,7 @@ const links = [
     {links.map((link) => (
       <li><a href={link.href}>{link.label}</a></li>
     ))}
-    <li><a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a consultation</a></li>
+    <li><a href="/book">Book a consultation</a></li>
   </ul>
 </div>
 

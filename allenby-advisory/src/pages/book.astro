@@ -1,0 +1,368 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import { BOOKING_URL } from '../config';
+import { Image } from 'astro:assets';
+import bookImage from '../assets/book_a_meeting_image.png';
+---
+
+<Base
+  title="Book a consultation — Allenby Advisory"
+  description="Book a free 30-minute consultation with Allenby Advisory. No pitch, no pressure — just a conversation about your event technology, audience, or digital challenge."
+>
+  <Nav />
+
+  <main>
+
+    <!-- ============================================================
+         HERO — Two-column grid, text left, image right
+         ============================================================ -->
+    <section class="book-hero">
+      <div class="book-hero-text reveal">
+        <SectionLabel text="Book a consultation" />
+        <h1 class="book-h1 animate-slide-up" transition:animate="fade">
+          Thirty minutes.<br />Genuinely useful.
+        </h1>
+        <p class="book-intro">The free consultation is designed to be useful whether or not we end up working together. Most people come with a specific question or a decision they're trying to make, and leave with a clearer view of their options.</p>
+        <div class="book-cta-row">
+          <Button label="Book your free consultation" href={BOOKING_URL} external={true} />
+          <p class="book-email-inline">Or email <a href="mailto:ade@allenby-advisory.com" class="book-email-link">Ade directly</a></p>
+        </div>
+      </div>
+
+      <div class="book-hero-image" aria-hidden="true">
+        <Image
+          src={bookImage}
+          alt=""
+          widths={[720, 1080, 1440]}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          loading="eager"
+          class="book-hero-image-photo"
+        />
+        <div class="book-hero-image-overlay-multiply"></div>
+        <div class="book-hero-image-overlay-accent"></div>
+        <div class="book-hero-image-overlay-fade"></div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         WHAT WE'LL COVER — Full-width, 280px/1fr internal grid
+         ============================================================ -->
+    <section class="book-cover-section">
+      <div class="book-cover-inner">
+        <div class="book-cover-eyebrow">
+          <SectionLabel text="What we'll cover" />
+        </div>
+        <ul class="book-cover-list">
+          <li class="book-cover-item reveal" style="--stagger-delay: 0s;">
+            <span class="book-cover-num">01</span>
+            <div class="book-cover-content">
+              <p class="book-cover-label">Where you are now</p>
+              <p class="book-cover-desc">The current state of your event tech, audience experience, or digital capability — and the gaps you're feeling.</p>
+            </div>
+          </li>
+          <li class="book-cover-item reveal" style="--stagger-delay: 0.1s;">
+            <span class="book-cover-num">02</span>
+            <div class="book-cover-content">
+              <p class="book-cover-label">What you're trying to achieve</p>
+              <p class="book-cover-desc">The outcome you're working toward — whether that's a platform decision, a delivery problem, or building internal capability.</p>
+            </div>
+          </li>
+          <li class="book-cover-item reveal" style="--stagger-delay: 0.2s;">
+            <span class="book-cover-num">03</span>
+            <div class="book-cover-content">
+              <p class="book-cover-label">Where we might help (or not)</p>
+              <p class="book-cover-desc">An honest view of where we could add value — and where you're better served by another route. If we're not the right fit, we'll say so.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CLOSING CTA STRIP — H3 + button + email as one composed block
+         ============================================================ -->
+    <section class="book-closing reveal">
+      <h3 class="book-closing-h3">No pitch, no pressure — just a conversation.</h3>
+      <Button label="Book your free consultation" href={BOOKING_URL} external={true} />
+      <p class="book-closing-email">Or email Ade directly: <a href="mailto:ade@allenby-advisory.com" class="book-email-link">ade@allenby-advisory.com</a></p>
+    </section>
+
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  /* ---- Hero ---- */
+  .book-hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 540px;
+    overflow: hidden;
+    border-bottom: 0.5px solid var(--lightgrey);
+    background: var(--offwhite);
+  }
+
+  .book-hero-text {
+    position: relative;
+    z-index: 2;
+    padding: var(--space-2xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 640px;
+  }
+
+  .book-h1 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 1.06;
+    letter-spacing: 0.01em;
+    color: var(--charcoal);
+    margin-bottom: 28px;
+  }
+
+  .book-intro {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--body);
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
+
+  .book-cta-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .book-email-inline {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+    margin: 0;
+  }
+
+  .book-email-link {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .book-email-link:hover {
+    text-decoration: underline;
+  }
+
+  /* ---- Hero image ---- */
+  .book-hero-image {
+    position: relative;
+    overflow: hidden;
+    animation: hero-image-fade-in 0.8s ease-out 0.15s both;
+  }
+
+  .book-hero-image-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Layer 1 — charcoal multiply to deepen shadows into brand charcoal */
+  .book-hero-image-overlay-multiply {
+    position: absolute;
+    inset: 0;
+    background: var(--charcoal);
+    mix-blend-mode: multiply;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  /* Layer 2 — subtle accent colour shift */
+  .book-hero-image-overlay-accent {
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    mix-blend-mode: color;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  /* Layer 3 — horizontal fade into offwhite at the text column side */
+  .book-hero-image-overlay-fade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      var(--offwhite) 0%,
+      rgba(245, 244, 242, 0.85) 18%,
+      rgba(245, 244, 242, 0) 55%
+    );
+    pointer-events: none;
+  }
+
+  @keyframes hero-image-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .book-hero-image {
+      animation: none;
+    }
+  }
+
+  /* ---- What we'll cover ---- */
+  .book-cover-section {
+    background: var(--offwhite);
+    padding: var(--space-2xl) var(--space-lg);
+    border-bottom: 0.5px solid var(--lightgrey);
+  }
+
+  .book-cover-inner {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .book-cover-eyebrow {
+    padding-top: 0;
+  }
+
+  .book-cover-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .book-cover-item {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 24px;
+    align-items: flex-start;
+    padding: 22px 0;
+    border-bottom: 0.5px solid var(--lightgrey);
+    transition-delay: var(--stagger-delay, 0s);
+  }
+
+  .book-cover-item:first-child {
+    padding-top: 0;
+  }
+
+  .book-cover-item:last-child {
+    border-bottom: none;
+  }
+
+  .book-cover-num {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--lightgrey);
+    line-height: 1;
+  }
+
+  .book-cover-label {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .book-cover-desc {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--body);
+  }
+
+  /* ---- Closing CTA strip ---- */
+  .book-closing {
+    background: var(--offwhite);
+    padding: var(--space-2xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .book-closing-h3 {
+    font-family: 'Archivo Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: var(--charcoal);
+    margin-bottom: 32px;
+  }
+
+  .book-closing :global(.btn) {
+    margin-bottom: 20px;
+  }
+
+  .book-closing-email {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--midgrey);
+    margin: 0;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 768px) {
+    /* Hero */
+    .book-hero {
+      grid-template-columns: 1fr;
+    }
+
+    .book-hero-text {
+      max-width: none;
+      padding: 48px 20px;
+    }
+
+    .book-hero-image {
+      display: none;
+    }
+
+    .book-h1 {
+      font-size: 34px;
+    }
+
+    .book-cta-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    /* Cover section */
+    .book-cover-section {
+      padding: 48px 20px;
+    }
+
+    .book-cover-inner {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    /* Closing */
+    .book-closing {
+      padding: 48px 20px;
+    }
+
+    .book-closing-h3 {
+      font-size: 22px;
+    }
+  }
+</style>
