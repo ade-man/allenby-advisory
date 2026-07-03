@@ -37,7 +37,7 @@ import { BOOKING_URL } from '../config';
       </div>
       <div class="service-right">
         <h3>Strategic Input, When You Need It</h3>
-        <p class="service-body">You have internal resource but need specialist knowledge to make the right decisions. We provide senior expertise on demand — reviewing your technology landscape, interrogating supplier proposals, and pressure-testing your digital roadmap.</p>
+        <p class="service-body">You have internal resource but need specialist knowledge to make the right decisions. We provide senior expertise on demand: reviewing your technology landscape, interrogating supplier proposals, and pressure-testing your digital roadmap.</p>
         <p class="fit-label">This is right for you if:</p>
         <ul class="fit-list">
           <li>You're evaluating new technology and want an independent view</li>
@@ -62,11 +62,11 @@ import { BOOKING_URL } from '../config';
       </div>
       <div class="service-right">
         <h3>From Brief to Results</h3>
-        <p class="service-body">You have a clear outcome to achieve — a new platform to implement, a feature to build, a programme to launch — but not the specialist capacity to deliver it well. We scope the project, manage the vendor relationship, and see it through to a successful outcome at your event.</p>
+        <p class="service-body">You have a clear outcome to achieve: a new platform to implement, a feature to build, a programme to launch. What you don't have is the specialist capacity to deliver it well. We scope the project, manage the vendor relationship, and see it through to a successful outcome at your event.</p>
         <p class="fit-label">This is right for you if:</p>
         <ul class="fit-list">
           <li>You're replacing an existing technology platform</li>
-          <li>You're launching a new audience-facing feature — meetings, navigation, awards, sessions</li>
+          <li>You're launching a new audience-facing feature: meetings, navigation, awards, sessions</li>
           <li>You need a project lead with deep event tech experience to drive delivery</li>
         </ul>
         <div class="how-it-works">
@@ -87,7 +87,7 @@ import { BOOKING_URL } from '../config';
       </div>
       <div class="service-right">
         <h3>Getting More from What You Already Have</h3>
-        <p class="service-body">Sometimes the platform isn't the problem — the problem is adoption, engagement and results. We work with your team to build the strategy and onboarding journey that turns existing tech investment into real outcomes for your audience.</p>
+        <p class="service-body">Sometimes the platform isn't the problem. The problem is adoption, engagement and results. We work with your team to build the strategy and onboarding journey that turns existing tech investment into real outcomes for your audience.</p>
         <p class="fit-label">This is right for you if:</p>
         <ul class="fit-list">
           <li>You've invested in a platform that isn't delivering expected engagement</li>
@@ -220,8 +220,9 @@ import { BOOKING_URL } from '../config';
 
   .service-badge {
     display: inline-block;
-    background: var(--charcoal);
-    color: var(--white);
+    background: none;
+    border: 0.5px solid var(--midgrey);
+    color: var(--midgrey);
     font-family: 'Archivo', sans-serif;
     font-size: 10px;
     letter-spacing: 0.10em;
@@ -338,6 +339,9 @@ import { BOOKING_URL } from '../config';
     color: var(--charcoal);
     font-weight: 700;
     margin-bottom: 6px;
+    line-height: 1.4;
+    /* Reserve two lines so descriptions align across cells regardless of label wrap */
+    min-height: 2.8em;
   }
 
   .cap-desc {

@@ -32,6 +32,9 @@ const { number, category, title, body, href } = Astro.props;
     letter-spacing: 0.10em;
     text-transform: uppercase;
     color: var(--midgrey);
+    /* The element-level `p { flex: 1 }` below must not stretch the eyebrow,
+       or spare space pushes the title down in shorter tiles */
+    flex: none;
   }
 
   h3 {
@@ -41,6 +44,8 @@ const { number, category, title, body, href } = Astro.props;
     color: var(--charcoal);
     letter-spacing: 0.01em;
     line-height: 1.15;
+    /* Reserve two lines so body text aligns across tiles regardless of title wrap */
+    min-height: 2.3em;
   }
 
   p {
